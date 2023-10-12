@@ -1,0 +1,26 @@
+import 'package:dailyx/core/locator/locator.dart';
+import 'package:dailyx/core/routing/app_router.dart';
+import 'package:flutter/material.dart';
+
+Future<void> main() async {
+  await _initializeTools();
+  
+  runApp(const MyApp());
+}
+
+Future<void> _initializeTools() async {
+  await configureDependencies();
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final _appRouter = AppRouter();
+    
+    return MaterialApp.router(            
+      routerConfig: _appRouter.config(),         
+    );
+  }
+}
