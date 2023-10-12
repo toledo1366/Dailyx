@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dailyx/presentation/cubits/control_panel/control_panel_cubit.dart';
 import 'package:dailyx/presentation/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class ControlPanelPage extends StatefulWidget {
@@ -16,35 +18,47 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ControlPanelCubit()..initToDos(),
+      child: Scaffold(
+        appBar: const CustomAppBar(
+          title: 'Hello, Damian!',
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0))
+          ), 
+          child: const Icon(Icons.add),
+          backgroundColor: Colors.deepPurple,
+        ),
+        body: BlocBuilder<ControlPanelCubit, ControlPanelState>(
+          builder: (context, state) => state.map(
+            loading: (_) => Text('Loading'),
+            failed: (_) => Container(), 
+            success: (data) => _buildContent(context, data.toDos),
+          ),
+        ),
+      ),
+    );
+  }
 
-    return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Hello, Damian!',
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15.0))
-        ), 
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildQuickSummaryCard(context),
-          const SizedBox(height: 40,),
-          SizedBox(
-            height: 200.0,
-            child: _buildToDoSection(context),
-          ),
-          const SizedBox(height: 40,),
-          SizedBox(
-            height: 300.0,
-            child: _buildInProgressSection(context),
-          ),
-        ],
-      ),
+  Widget _buildContent(BuildContext context, List<String> data) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildQuickSummaryCard(context),
+        const SizedBox(height: 40,),
+        SizedBox(
+          height: 200.0,
+          child: _buildToDoSection(context, data),
+        ),
+        const SizedBox(height: 40,),
+        SizedBox(
+          height: 300.0,
+          child: _buildInProgressSection(context),
+        ),
+      ],
     );
   }
   
@@ -95,7 +109,8 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
     );
   }
   
-  Widget _buildToDoSection(BuildContext context) {
+  Widget _buildToDoSection(BuildContext context, List<String> data) {
+
     return Padding(
       padding: const EdgeInsets.only(left: 25.0,top: 10.0),
       child: Column(
@@ -109,10 +124,10 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
                 Container(
                   height: 25,
                   width: 35,
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      '3',
-                      style: TextStyle(
+                      data.length.toString(),
+                      style: const TextStyle(
                         color: Colors.deepPurpleAccent
                       ),
                     ),
@@ -130,8 +145,8 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
             height: 150,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) => _buildToDoItem(context, index),
+              itemCount: data.length,
+              itemBuilder: (context, index) => _buildToDoItem(context, index, data[index]),
             ),
           ),
         ],
@@ -139,29 +154,29 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
     );
   }
   
-  Widget _buildToDoItem(BuildContext context, int index) {
+  Widget _buildToDoItem(BuildContext context, int index, String data) {
     return SizedBox(
       height: 150,
       width: 150,
       child: Card(
-        color: Color.fromARGB(255, 198, 179, 252),
+        color: const Color.fromARGB(255, 198, 179, 252),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0)
         ),
-        child: const Padding(
-          padding: EdgeInsets.only(left: 10.0),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 20.0),
-                child: Text('Type'),
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text(data),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 20.0),
                 child: Text('Title'),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 20.0),
                 child: Text('End date'),
               ),
@@ -197,7 +212,7 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10),
-                    color: Color.fromARGB(255, 215, 201, 253),
+                    color: const Color.fromARGB(255, 215, 201, 253),
                   ),
                 ),
               ],
@@ -207,7 +222,7 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(10),
-              color: Color.fromARGB(255, 243, 239, 255),
+              color: const Color.fromARGB(255, 243, 239, 255),
             ),
             child: SizedBox(
               height: 250,

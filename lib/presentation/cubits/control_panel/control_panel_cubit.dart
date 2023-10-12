@@ -9,5 +9,25 @@ part 'control_panel_state.dart';
 @injectable
 class ControlPanelCubit extends CubitBase<ControlPanelState>{
   ControlPanelCubit() : super(const ControlPanelState.loading());
+
+  // List<String> initToDos() {
+  //   List<String> toDos = [];
+  //   toDos.add('Umyj siuraka');
+  //   toDos.add('Wyszoruj pupę');
+
+  //   return toDos;
+  // }
+
+  void initToDos() {
+    emit(const ControlPanelState.loading());
+
+    Future.delayed(Duration(seconds: 3));
+    List<String> toDos = [];
+    toDos.add('Umyj siuraka');
+    toDos.add('Wyszoruj pupę');
+
+    emit(ControlPanelState.success(toDos));
+  }
   
+
 }

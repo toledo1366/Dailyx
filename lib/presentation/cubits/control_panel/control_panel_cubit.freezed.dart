@@ -20,21 +20,21 @@ mixin _$ControlPanelState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String message) failed,
-    required TResult Function() success,
+    required TResult Function(List<String> toDos) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
-    TResult? Function()? success,
+    TResult? Function(List<String> toDos)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String message)? failed,
-    TResult Function()? success,
+    TResult Function(List<String> toDos)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +120,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String message) failed,
-    required TResult Function() success,
+    required TResult Function(List<String> toDos) success,
   }) {
     return loading();
   }
@@ -130,7 +130,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
-    TResult? Function()? success,
+    TResult? Function(List<String> toDos)? success,
   }) {
     return loading?.call();
   }
@@ -140,7 +140,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String message)? failed,
-    TResult Function()? success,
+    TResult Function(List<String> toDos)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -254,7 +254,7 @@ class _$FailedImpl implements _Failed {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String message) failed,
-    required TResult Function() success,
+    required TResult Function(List<String> toDos) success,
   }) {
     return failed(message);
   }
@@ -264,7 +264,7 @@ class _$FailedImpl implements _Failed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
-    TResult? Function()? success,
+    TResult? Function(List<String> toDos)? success,
   }) {
     return failed?.call(message);
   }
@@ -274,7 +274,7 @@ class _$FailedImpl implements _Failed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String message)? failed,
-    TResult Function()? success,
+    TResult Function(List<String> toDos)? success,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -332,6 +332,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> toDos});
 }
 
 /// @nodoc
@@ -341,35 +343,65 @@ class __$$SuccessImplCopyWithImpl<$Res>
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? toDos = null,
+  }) {
+    return _then(_$SuccessImpl(
+      null == toDos
+          ? _value._toDos
+          : toDos // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl();
+  const _$SuccessImpl(final List<String> toDos) : _toDos = toDos;
+
+  final List<String> _toDos;
+  @override
+  List<String> get toDos {
+    if (_toDos is EqualUnmodifiableListView) return _toDos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_toDos);
+  }
 
   @override
   String toString() {
-    return 'ControlPanelState.success()';
+    return 'ControlPanelState.success(toDos: $toDos)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            const DeepCollectionEquality().equals(other._toDos, _toDos));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_toDos));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String message) failed,
-    required TResult Function() success,
+    required TResult Function(List<String> toDos) success,
   }) {
-    return success();
+    return success(toDos);
   }
 
   @override
@@ -377,9 +409,9 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
-    TResult? Function()? success,
+    TResult? Function(List<String> toDos)? success,
   }) {
-    return success?.call();
+    return success?.call(toDos);
   }
 
   @override
@@ -387,11 +419,11 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String message)? failed,
-    TResult Function()? success,
+    TResult Function(List<String> toDos)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(toDos);
     }
     return orElse();
   }
@@ -432,5 +464,10 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements ControlPanelState {
-  const factory _Success() = _$SuccessImpl;
+  const factory _Success(final List<String> toDos) = _$SuccessImpl;
+
+  List<String> get toDos;
+  @JsonKey(ignore: true)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
