@@ -10,6 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dailyx/presentation/cubits/control_panel/control_panel_cubit.dart'
     as _i3;
+import 'package:dailyx/presentation/cubits/login/login_cubit.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -25,6 +26,7 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     gh.factory<_i3.ControlPanelCubit>(() => _i3.ControlPanelCubit());
+    gh.factory<_i4.LoginCubit>(() => _i4.LoginCubit());
     return this;
   }
 }
