@@ -48,6 +48,9 @@ dependencies:
   percent_indicator: ^4.2.3
   injectable: ^2.3.2
   get_it: ^7.6.4
+  firebase_core: ^2.17.0
+  firebase_auth: ^4.10.1
+  google_sign_in: ^6.1.5
   
 
 dev_dependencies:

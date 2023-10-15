@@ -1,11 +1,17 @@
 import 'package:dailyx/core/locator/locator.dart';
 import 'package:dailyx/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   await _initializeTools();
   
   runApp(const MyApp());
+}
+
+Future<void> initFirebase() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
 Future<void> _initializeTools() async {
@@ -20,7 +26,8 @@ class MyApp extends StatelessWidget {
     final _appRouter = AppRouter();
     
     return MaterialApp.router(            
-      routerConfig: _appRouter.config(),         
+      routerConfig: _appRouter.config(),  
+      debugShowCheckedModeBanner: false,       
     );
   }
 }
