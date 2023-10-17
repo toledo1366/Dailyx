@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/helpers/constants/strings/error_messages.dart';
 import 'package:dailyx/presentation/cubits/cubit_base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -13,13 +16,14 @@ part 'login_state.dart';
 class LoginCubit extends CubitBase<LoginState>{
   LoginCubit() : super(const LoginState.created());
 
-  Future<void> runLoginFlow() async {
+  Future<void> runLoginFlow(BuildContext context) async {
     final isAuthorized = await startAuth();
 
     if(isAuthorized){
       emit(const LoginState.success());
-    }
 
+      context.router.push(const ControlPanelRoute());
+    }
     emit(const LoginState.failed(failedLogin));
   }
 

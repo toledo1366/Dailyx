@@ -18,40 +18,45 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocProvider<LoginCubit>(
       create: (context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {
-          if(state == const LoginState.success()){
-            AutoRouter.of(context).navigate(ControlPanelRoute as PageRouteInfo);
-          }
-        },
-        builder: (context, state) => Scaffold(
-        body: Center(
-          child: GestureDetector(
-            onTap: () async => await di.get<LoginCubit>().runLoginFlow(),
-            child: Container(
-              width: 250,
-              height: 50,
-              decoration: const BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.red,
-                borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.account_circle, color: Colors.white),
-                  SizedBox(width: 10),
-                  Text(
-                    'Login with Google', 
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              )
-            ),
-          ),
-        ),
+      child: Scaffold(
+        body: BlocListener<LoginCubit, LoginState>(
+          listener: (context, state) {
+            if(state == LoginState.success()){
+              // AutoRouter.of(context).navigate(NextPageRoute())
+            }
+          },
+          bloc: LoginCubit(),
+          child: _buildContent(context),
       ),
+    ),
+    );  
+  }
+
+  Widget _buildContent(BuildContext context){
+    return Center(
+      child: GestureDetector(
+        onTap: () async => await di.get<LoginCubit>().runLoginFlow(context),
+        child: Container(
+          width: 250,
+          height: 50,
+          decoration: const BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Colors.red,
+            borderRadius: BorderRadius.all(Radius.circular(20))
+          ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(Icons.account_circle, color: Colors.white),
+              SizedBox(width: 10),
+              Text(
+                'Login with Google', 
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          )
+        ),
       ),
     );
   }
