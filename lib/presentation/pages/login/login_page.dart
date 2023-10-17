@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dailyx/core/locator/locator.dart';
+import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/presentation/cubits/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,11 +18,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocProvider<LoginCubit>(
       create: (context) => LoginCubit(),
-      child: BlocBuilder<LoginCubit, LoginState>(
+      child: BlocConsumer<LoginCubit, LoginState>(
+        listener: (context, state) {
+          if(state == const LoginState.success()){
+            AutoRouter.of(context).navigate(ControlPanelRoute as PageRouteInfo);
+          }
+        },
         builder: (context, state) => Scaffold(
         body: Center(
           child: GestureDetector(
-            onTap: () async => await di.get<LoginCubit>().beginLogin(),
+            onTap: () async => await di.get<LoginCubit>().runLoginFlow(),
             child: Container(
               width: 250,
               height: 50,

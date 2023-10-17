@@ -1,3 +1,4 @@
+import 'package:dailyx/helpers/constants/strings/error_messages.dart';
 import 'package:dailyx/presentation/cubits/cubit_base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +13,17 @@ part 'login_state.dart';
 class LoginCubit extends CubitBase<LoginState>{
   LoginCubit() : super(const LoginState.created());
 
-  Future<void> beginLogin() async {
+  Future<void> runLoginFlow() async {
+    final isAuthorized = await startAuth();
+
+    if(isAuthorized){
+      emit(const LoginState.success());
+    }
+
+    emit(const LoginState.failed(failedLogin));
+  }
+
+  Future<bool> startAuth() async {
     FirebaseApp defaultApp = await Firebase.initializeApp();
     GoogleSignIn _googleSignIn = GoogleSignIn();
     FirebaseAuth _auth = FirebaseAuth.instanceFor(app: defaultApp);   
@@ -23,8 +34,6 @@ class LoginCubit extends CubitBase<LoginState>{
       idToken: googleAuth.idToken,
     );
 
-    var user = await _auth.signInWithCredential(credential);
-
-    print(user.credential!.accessToken);
+    return credential.accessToken != null;
   }
 }
