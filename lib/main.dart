@@ -1,7 +1,9 @@
 import 'package:dailyx/core/locator/locator.dart';
 import 'package:dailyx/core/routing/app_router.dart';
+import 'package:dailyx/presentation/cubits/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -25,9 +27,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final _appRouter = AppRouter();
     
-    return MaterialApp.router(            
-      routerConfig: _appRouter.config(),  
-      debugShowCheckedModeBanner: false,       
+    return BlocProvider<LoginCubit>(
+      create: (context) => LoginCubit(),
+      child: MaterialApp.router(            
+        routerConfig: _appRouter.config(),  
+        debugShowCheckedModeBanner: false,       
+      ),
     );
   }
 }
