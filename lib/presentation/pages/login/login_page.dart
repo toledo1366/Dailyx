@@ -18,16 +18,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocProvider<LoginCubit>(
       create: (context) => LoginCubit(),
-      child: Scaffold(
-        body: BlocListener<LoginCubit, LoginState>(
-          listener: (context, state) {
-            if(state == LoginState.success()){
-              AutoRouter.of(context).navigate(ControlPanelRoute());
-            }
-          },
-          child: _buildContent(context),
+        child: Scaffold(
+          body: BlocListener<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if(state == const LoginState.success()){
+                AutoRouter.of(context).navigate(const ControlPanelRoute());
+              }
+            },
+            child: _buildContent(context),
+        ),
       ),
-    ),
     );  
   }
 

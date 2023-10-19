@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ControlPanelState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
@@ -25,6 +26,7 @@ mixin _$ControlPanelState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
@@ -32,6 +34,7 @@ mixin _$ControlPanelState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
@@ -40,6 +43,7 @@ mixin _$ControlPanelState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
@@ -47,6 +51,7 @@ mixin _$ControlPanelState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
@@ -54,6 +59,7 @@ mixin _$ControlPanelState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
@@ -78,6 +84,120 @@ class _$ControlPanelStateCopyWithImpl<$Res, $Val extends ControlPanelState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ControlPanelStateCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
+
+  @override
+  String toString() {
+    return 'ControlPanelState.initialized()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() loading,
+    required TResult Function(String message) failed,
+    required TResult Function(List<String> toDos) success,
+  }) {
+    return initialized();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? loading,
+    TResult? Function(String message)? failed,
+    TResult? Function(List<String> toDos)? success,
+  }) {
+    return initialized?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? loading,
+    TResult Function(String message)? failed,
+    TResult Function(List<String> toDos)? success,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Failed value) failed,
+    required TResult Function(_Success value) success,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Failed value)? failed,
+    TResult? Function(_Success value)? success,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Failed value)? failed,
+    TResult Function(_Success value)? success,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialized implements ControlPanelState {
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
@@ -118,6 +238,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
@@ -128,6 +249,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
@@ -138,6 +260,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
@@ -152,6 +275,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
@@ -162,6 +286,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
@@ -172,6 +297,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
@@ -252,6 +378,7 @@ class _$FailedImpl implements _Failed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
@@ -262,6 +389,7 @@ class _$FailedImpl implements _Failed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
@@ -272,6 +400,7 @@ class _$FailedImpl implements _Failed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
@@ -286,6 +415,7 @@ class _$FailedImpl implements _Failed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
@@ -296,6 +426,7 @@ class _$FailedImpl implements _Failed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
@@ -306,6 +437,7 @@ class _$FailedImpl implements _Failed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
@@ -397,6 +529,7 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
@@ -407,6 +540,7 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
@@ -417,6 +551,7 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
@@ -431,6 +566,7 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
@@ -441,6 +577,7 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
@@ -451,6 +588,7 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
