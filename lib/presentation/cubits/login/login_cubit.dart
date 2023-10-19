@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/helpers/constants/strings/error_messages.dart';
-import 'package:dailyx/presentation/cubits/cubit_base.dart';
-import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';

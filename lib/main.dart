@@ -27,12 +27,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final _appRouter = AppRouter();
     
-    return BlocProvider<LoginCubit>(
-      create: (context) => LoginCubit(),
-      child: MaterialApp.router(            
-        routerConfig: _appRouter.config(),  
-        debugShowCheckedModeBanner: false,       
-      ),
+    return MaterialApp.router(            
+      routerConfig: _appRouter.config(),  
+      debugShowCheckedModeBanner: false,       
     );
   }
 }

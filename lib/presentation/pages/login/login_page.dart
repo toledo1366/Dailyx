@@ -16,12 +16,18 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
-      builder: (context, state) {
-        return Scaffold(
-          body: _buildContent(context),
-        );
-      },
+    return BlocProvider<LoginCubit>(
+      create: (context) => LoginCubit(),
+      child: Scaffold(
+        body: BlocListener<LoginCubit, LoginState>(
+          listener: (context, state) {
+            if(state == LoginState.success()){
+              AutoRouter.of(context).navigate(ControlPanelRoute());
+            }
+          },
+          child: _buildContent(context),
+      ),
+    ),
     );  
   }
 
