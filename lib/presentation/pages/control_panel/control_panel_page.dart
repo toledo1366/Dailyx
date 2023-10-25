@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dailyx/presentation/cubits/control_panel/control_panel_cubit.dart';
+import 'package:dailyx/core/routing/app_router.dart';
+import 'package:dailyx/presentation/pages/control_panel/cubit/control_panel_cubit.dart';
 import 'package:dailyx/presentation/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -20,23 +21,25 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ControlPanelCubit()..initToDos(),
-      child: Scaffold(
-        appBar: const CustomAppBar(
-          title: 'Hello, Damian!',
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0))
-          ), 
-          child: const Icon(Icons.add),
-          backgroundColor: Colors.deepPurple,
-        ),
-        body: BlocBuilder<ControlPanelCubit, ControlPanelState>(
+      child: BlocBuilder<ControlPanelCubit, ControlPanelState>(
           builder: (context, state) => state.map(
             loading: (_) => Text('Loading'),
             failed: (_) => Container(), 
-            success: (data) => _buildContent(context, data.toDos),
+            success: (data) => Scaffold(
+              appBar: const CustomAppBar(
+                title: 'Hello, Damian!',
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  context.router.navigate(TaskFormRoute());
+                },
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))
+                ), 
+                child: const Icon(Icons.add),
+                backgroundColor: Colors.deepPurple,
+              ),
+            body: _buildContent(context, data.toDos),
           ),
         ),
       ),

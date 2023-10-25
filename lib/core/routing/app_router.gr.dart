@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    TaskFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TaskFormPage(),
+      );
+    },
   };
 }
 
@@ -54,6 +60,20 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TaskFormPage]
+class TaskFormRoute extends PageRouteInfo<void> {
+  const TaskFormRoute({List<PageRouteInfo>? children})
+      : super(
+          TaskFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TaskFormRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dailyx/core/locator/locator.dart';
 import 'package:dailyx/core/routing/app_router.dart';
-import 'package:dailyx/presentation/cubits/login/login_cubit.dart';
+import 'package:dailyx/presentation/pages/login/cubit/login_cubit.dart'; 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,41 +16,47 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
-      builder: (context, state) {
-        return Scaffold(
-          body: _buildContent(context),
-        );
-      },
-    );  
+    return Scaffold(
+      body: BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) => state.when(
+          created: ()  => _buildContent(context), 
+          failed: (message) => Text(message),
+          success: () {
+            context.navigateTo(ControlPanelRoute());
+
+            return Placeholder();
+          }
+        ),
+      ),
+    );
   }
 
   Widget _buildContent(BuildContext context){
     return Center(
-      child: GestureDetector(
-        onTap: () async => await di.get<LoginCubit>().runLoginFlow(context),
-        child: Container(
-          width: 250,
-          height: 50,
-          decoration: const BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Colors.red,
-            borderRadius: BorderRadius.all(Radius.circular(20))
+        child: GestureDetector(
+          onTap: () async => await di.get<LoginCubit>().runLoginFlow(context),
+          child: Container(
+            width: 250,
+            height: 50,
+            decoration: const BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.red,
+              borderRadius: BorderRadius.all(Radius.circular(20))
+            ),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Icon(Icons.account_circle, color: Colors.white),
+                SizedBox(width: 10),
+                Text(
+                  'Login with Google', 
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            )
           ),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Icon(Icons.account_circle, color: Colors.white),
-              SizedBox(width: 10),
-              Text(
-                'Login with Google', 
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
-          )
         ),
-      ),
     );
   }
 }

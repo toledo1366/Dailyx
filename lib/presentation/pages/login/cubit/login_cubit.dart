@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/helpers/constants/strings/error_messages.dart';
-import 'package:dailyx/presentation/cubits/cubit_base.dart';
-import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
@@ -23,13 +21,15 @@ class LoginCubit extends Cubit<LoginState>{
 
     if(isAuthorized){
       context.router.popAndPush(ControlPanelRoute());
+      emit(const LoginState.success());
     }
     
     emit(const LoginState.failed(failedLogin));
   }
 
   Future<bool> startAuth() async {
-    FirebaseApp defaultApp = await Firebase.initializeApp();
+    try{
+      FirebaseApp defaultApp = await Firebase.initializeApp();
     GoogleSignIn _googleSignIn = GoogleSignIn();
     FirebaseAuth _auth = FirebaseAuth.instanceFor(app: defaultApp);   
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -40,5 +40,12 @@ class LoginCubit extends Cubit<LoginState>{
     );
 
     return credential.accessToken != null;
+    } catch (e) {
+      print(e.toString());
+      // emit(const LoginState.failed(failedLogin));
+
+      return false;
+    }
+    
   }
 }
