@@ -39,6 +39,9 @@ class _TaskFormPageState extends State<TaskFormPage> {
                   onChanged: (value) => cubit.titleSettingHandler(value),
                 ),
               ),
+              ListView.builder(
+                itemBuilder: (context, index){},
+              ),
             ],
           ),
         ),
