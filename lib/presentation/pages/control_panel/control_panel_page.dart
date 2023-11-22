@@ -19,11 +19,24 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<ControlPanelCubit>(
       create: (context) => ControlPanelCubit()..initToDos(),
-      child: BlocBuilder<ControlPanelCubit, ControlPanelState>(
+      child: Scaffold(
+        appBar: const CustomAppBar(
+          title: 'Hello, Damian!',
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0))
+          ),
+          backgroundColor: Colors.deepPurple, 
+          child: const Icon(Icons.add),
+        ),
+        body: BlocBuilder<ControlPanelCubit, ControlPanelState>(
           builder: (context, state) => state.map(
-            loading: (_) => Text('Loading'),
+            initialized: (_) => const Text('Loading'),
+            loading: (_) => const Text('Loading'),
             failed: (_) => Container(), 
             success: (data) => Scaffold(
               appBar: const CustomAppBar(
@@ -43,25 +56,28 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
           ),
         ),
       ),
+      ),
     );
   }
 
   Widget _buildContent(BuildContext context, List<String> data) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        _buildQuickSummaryCard(context),
-        const SizedBox(height: 40,),
-        SizedBox(
-          height: 200.0,
-          child: _buildToDoSection(context, data),
-        ),
-        const SizedBox(height: 40,),
-        SizedBox(
-          height: 300.0,
-          child: _buildInProgressSection(context),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildQuickSummaryCard(context),
+          const SizedBox(height: 40,),
+          SizedBox(
+            height: 200.0,
+            child: _buildToDoSection(context, data),
+          ),
+          const SizedBox(height: 40,),
+          SizedBox(
+            height: 300.0,
+            child: _buildInProgressSection(context),
+          ),
+        ],
+      ),
     );
   }
   
@@ -127,6 +143,11 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
                 Container(
                   height: 25,
                   width: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromARGB(255, 215, 201, 253),
+                  ),
                   child: Center(
                     child: Text(
                       data.length.toString(),
@@ -134,11 +155,6 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
                         color: Colors.deepPurpleAccent
                       ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 215, 201, 253),
                   ),
                 ),
               ],
@@ -204,6 +220,11 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
                 Container(
                   height: 25,
                   width: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromARGB(255, 215, 201, 253),
+                  ),
                   child: const Center(
                     child: Text(
                       '3',
@@ -211,11 +232,6 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
                         color: Colors.deepPurpleAccent
                       ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 215, 201, 253),
                   ),
                 ),
               ],
