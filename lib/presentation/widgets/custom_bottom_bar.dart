@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dailyx/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
@@ -31,11 +33,7 @@ class CustomBottomBar extends StatelessWidget {
       ],
       enableIconRotation: true,
       onTap: (index) {
-        _pageControlller.animateToPage(
-          index,
-          duration: const Duration(milliseconds: 400),
-          curve: Curves.easeOut,
-        );
+        AutoRouter.of(context).navigate(TaskFormRoute());
       },
     );
   }

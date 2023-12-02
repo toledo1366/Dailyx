@@ -40,7 +40,8 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
             initialized: (_) => const Text('Loading'),
             loading: (_) => const Text('Loading'),
             failed: (_) => Container(), 
-            success: (data) => _buildContent(context, data.toDos),
+            success: (data) => _buildContent(context, data.toDos)
+            //  _buildContent(context, data.toDos),
           ),
         ),
         bottomNavigationBar: CustomBottomBar(),
