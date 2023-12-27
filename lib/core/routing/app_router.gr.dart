@@ -21,6 +21,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ControlPanelPage(),
       );
     },
+    DiaryFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DiaryFormPage(),
+      );
+    },
+    DiaryListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DiaryListPage(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -46,6 +58,34 @@ class ControlPanelRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ControlPanelRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DiaryFormPage]
+class DiaryFormRoute extends PageRouteInfo<void> {
+  const DiaryFormRoute({List<PageRouteInfo>? children})
+      : super(
+          DiaryFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DiaryFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DiaryListPage]
+class DiaryListRoute extends PageRouteInfo<void> {
+  const DiaryListRoute({List<PageRouteInfo>? children})
+      : super(
+          DiaryListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DiaryListRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

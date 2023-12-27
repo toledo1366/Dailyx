@@ -22,18 +22,19 @@ class CustomBottomBar extends StatelessWidget {
       flat: true,
       useActiveColorByDefault: false,
       items: const [
-        RollingBottomBarItem(Icons.home,
-            label: 'Home', activeColor: Colors.deepPurpleAccent),
-            RollingBottomBarItem(Icons.home,
-            label: 'Home', activeColor: Colors.deepPurpleAccent),
-            RollingBottomBarItem(Icons.home,
-            label: 'Home', activeColor: Colors.deepPurpleAccent),
-            RollingBottomBarItem(Icons.home,
-            label: 'Home', activeColor: Colors.deepPurpleAccent),
+        RollingBottomBarItem(Icons.home, label: 'Home', activeColor: Colors.deepPurpleAccent),
+        RollingBottomBarItem(Icons.note, label: 'Home', activeColor: Colors.deepPurpleAccent),
       ],
       enableIconRotation: true,
       onTap: (index) {
-        AutoRouter.of(context).navigate(TaskFormRoute());
+        switch(index){
+          case 0: {
+            // AutoRouter.of(context).navigate(const TaskFormRoute());
+          }
+          case 1: {
+            AutoRouter.of(context).navigate(const DiaryListRoute());
+          }
+        }
       },
     );
   }

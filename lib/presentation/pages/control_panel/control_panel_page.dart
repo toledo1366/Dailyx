@@ -28,7 +28,9 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
           title: 'Hello, Damian!',
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+            // await context.router.push(const TaskFormRoute());
+          },
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15.0))
           ),
