@@ -23,8 +23,8 @@ class ControlPanelCubit extends Cubit<ControlPanelState>{
 
     Future.delayed(Duration(seconds: 3));
     List<String> toDos = [];
-    toDos.add('Umyj siuraka');
-    toDos.add('Wyszoruj pupę');
+    // toDos.add('Umyj siuraka');
+    // toDos.add('Wyszoruj pupę');
 
     emit(ControlPanelState.success(toDos));
   }
