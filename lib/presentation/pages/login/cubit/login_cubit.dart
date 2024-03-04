@@ -20,7 +20,7 @@ class LoginCubit extends Cubit<LoginState>{
     final isAuthorized = await startAuth();
 
     if(isAuthorized){
-      context.router.popAndPush(ControlPanelRoute());
+      context.router.popAndPush(HomeRoute());
       emit(const LoginState.success());
     }
     

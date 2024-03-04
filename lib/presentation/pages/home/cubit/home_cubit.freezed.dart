@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'control_panel_cubit.dart';
+part of 'home_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,13 +15,14 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ControlPanelState {
+mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
+    required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$ControlPanelState {
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
+    TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$ControlPanelState {
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$ControlPanelState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$ControlPanelState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,22 +68,22 @@ mixin _$ControlPanelState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ControlPanelStateCopyWith<$Res> {
-  factory $ControlPanelStateCopyWith(
-          ControlPanelState value, $Res Function(ControlPanelState) then) =
-      _$ControlPanelStateCopyWithImpl<$Res, ControlPanelState>;
+abstract class $HomeStateCopyWith<$Res> {
+  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
+      _$HomeStateCopyWithImpl<$Res, HomeState>;
 }
 
 /// @nodoc
-class _$ControlPanelStateCopyWithImpl<$Res, $Val extends ControlPanelState>
-    implements $ControlPanelStateCopyWith<$Res> {
-  _$ControlPanelStateCopyWithImpl(this._value, this._then);
+class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
+    implements $HomeStateCopyWith<$Res> {
+  _$HomeStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,7 +100,7 @@ abstract class _$$InitializedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitializedImplCopyWithImpl<$Res>
-    extends _$ControlPanelStateCopyWithImpl<$Res, _$InitializedImpl>
+    extends _$HomeStateCopyWithImpl<$Res, _$InitializedImpl>
     implements _$$InitializedImplCopyWith<$Res> {
   __$$InitializedImplCopyWithImpl(
       _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
@@ -109,7 +114,7 @@ class _$InitializedImpl implements _Initialized {
 
   @override
   String toString() {
-    return 'ControlPanelState.initialized()';
+    return 'HomeState.initialized()';
   }
 
   @override
@@ -128,6 +133,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
+    required TResult Function() empty,
   }) {
     return initialized();
   }
@@ -139,6 +145,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
+    TResult? Function()? empty,
   }) {
     return initialized?.call();
   }
@@ -150,6 +157,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -165,6 +173,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
   }) {
     return initialized(this);
   }
@@ -176,6 +185,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
   }) {
     return initialized?.call(this);
   }
@@ -187,6 +197,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -196,7 +207,7 @@ class _$InitializedImpl implements _Initialized {
   }
 }
 
-abstract class _Initialized implements ControlPanelState {
+abstract class _Initialized implements HomeState {
   const factory _Initialized() = _$InitializedImpl;
 }
 
@@ -209,7 +220,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$ControlPanelStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$HomeStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -223,7 +234,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'ControlPanelState.loading()';
+    return 'HomeState.loading()';
   }
 
   @override
@@ -242,6 +253,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
+    required TResult Function() empty,
   }) {
     return loading();
   }
@@ -253,6 +265,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
+    TResult? Function()? empty,
   }) {
     return loading?.call();
   }
@@ -264,6 +277,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -279,6 +293,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
   }) {
     return loading(this);
   }
@@ -290,6 +305,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
   }) {
     return loading?.call(this);
   }
@@ -301,6 +317,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -310,7 +327,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements ControlPanelState {
+abstract class _Loading implements HomeState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -325,7 +342,7 @@ abstract class _$$FailedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FailedImplCopyWithImpl<$Res>
-    extends _$ControlPanelStateCopyWithImpl<$Res, _$FailedImpl>
+    extends _$HomeStateCopyWithImpl<$Res, _$FailedImpl>
     implements _$$FailedImplCopyWith<$Res> {
   __$$FailedImplCopyWithImpl(
       _$FailedImpl _value, $Res Function(_$FailedImpl) _then)
@@ -355,7 +372,7 @@ class _$FailedImpl implements _Failed {
 
   @override
   String toString() {
-    return 'ControlPanelState.failed(message: $message)';
+    return 'HomeState.failed(message: $message)';
   }
 
   @override
@@ -382,6 +399,7 @@ class _$FailedImpl implements _Failed {
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
+    required TResult Function() empty,
   }) {
     return failed(message);
   }
@@ -393,6 +411,7 @@ class _$FailedImpl implements _Failed {
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
+    TResult? Function()? empty,
   }) {
     return failed?.call(message);
   }
@@ -404,6 +423,7 @@ class _$FailedImpl implements _Failed {
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -419,6 +439,7 @@ class _$FailedImpl implements _Failed {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
   }) {
     return failed(this);
   }
@@ -430,6 +451,7 @@ class _$FailedImpl implements _Failed {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
   }) {
     return failed?.call(this);
   }
@@ -441,6 +463,7 @@ class _$FailedImpl implements _Failed {
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -450,7 +473,7 @@ class _$FailedImpl implements _Failed {
   }
 }
 
-abstract class _Failed implements ControlPanelState {
+abstract class _Failed implements HomeState {
   const factory _Failed(final String message) = _$FailedImpl;
 
   String get message;
@@ -470,7 +493,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$ControlPanelStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$HomeStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
@@ -505,7 +528,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'ControlPanelState.success(toDos: $toDos)';
+    return 'HomeState.success(toDos: $toDos)';
   }
 
   @override
@@ -533,6 +556,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loading,
     required TResult Function(String message) failed,
     required TResult Function(List<String> toDos) success,
+    required TResult Function() empty,
   }) {
     return success(toDos);
   }
@@ -544,6 +568,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loading,
     TResult? Function(String message)? failed,
     TResult? Function(List<String> toDos)? success,
+    TResult? Function()? empty,
   }) {
     return success?.call(toDos);
   }
@@ -555,6 +580,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loading,
     TResult Function(String message)? failed,
     TResult Function(List<String> toDos)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -570,6 +596,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Failed value) failed,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
   }) {
     return success(this);
   }
@@ -581,6 +608,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
   }) {
     return success?.call(this);
   }
@@ -592,6 +620,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Failed value)? failed,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -601,11 +630,131 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements ControlPanelState {
+abstract class _Success implements HomeState {
   const factory _Success(final List<String> toDos) = _$SuccessImpl;
 
   List<String> get toDos;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EmptyImplCopyWith<$Res> {
+  factory _$$EmptyImplCopyWith(
+          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
+      __$$EmptyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EmptyImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$EmptyImpl>
+    implements _$$EmptyImplCopyWith<$Res> {
+  __$$EmptyImplCopyWithImpl(
+      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$EmptyImpl implements _Empty {
+  const _$EmptyImpl();
+
+  @override
+  String toString() {
+    return 'HomeState.empty()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$EmptyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() loading,
+    required TResult Function(String message) failed,
+    required TResult Function(List<String> toDos) success,
+    required TResult Function() empty,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? loading,
+    TResult? Function(String message)? failed,
+    TResult? Function(List<String> toDos)? success,
+    TResult? Function()? empty,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? loading,
+    TResult Function(String message)? failed,
+    TResult Function(List<String> toDos)? success,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Failed value) failed,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Failed value)? failed,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Failed value)? failed,
+    TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Empty implements HomeState {
+  const factory _Empty() = _$EmptyImpl;
 }

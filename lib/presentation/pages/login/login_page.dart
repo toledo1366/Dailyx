@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
           body: BlocListener<LoginCubit, LoginState>(
             listener: (context, state) {
               if(state == const LoginState.success()){
-                AutoRouter.of(context).navigate(const ControlPanelRoute());
+                AutoRouter.of(context).navigate(const HomeRoute());
               }
             },
             child: _buildContent(context),

@@ -1,28 +1,27 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dailyx/core/routing/app_router.dart';
-import 'package:dailyx/presentation/pages/control_panel/cubit/control_panel_cubit.dart';
-import 'package:dailyx/presentation/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_bottom_bar.dart';
+import 'cubit/home_cubit.dart';
 
 @RoutePage()
-class ControlPanelPage extends StatefulWidget {
-  const ControlPanelPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<ControlPanelPage> createState() => _ControlPanelPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _ControlPanelPageState extends State<ControlPanelPage> {
+class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ControlPanelCubit>(
-      create: (context) => ControlPanelCubit()..initToDos(),
+    return BlocProvider<HomeCubit>(
+      create: (context) => HomeCubit()..initToDos(),
       child: Scaffold(
         appBar: const CustomAppBar(
           title: 'Hello, Damian!',
@@ -37,12 +36,13 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
           backgroundColor: Colors.deepPurple, 
           child: const Icon(Icons.add),
         ),
-        body: BlocBuilder<ControlPanelCubit, ControlPanelState>(
+        body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) => state.map(
             initialized: (_) => const Text('Loading'),
             loading: (_) => const Text('Loading'),
             failed: (_) => Container(), 
-            success: (data) => _buildContent(context, data.toDos)
+            success: (data) => _buildContent(context, data.toDos),
+            empty: (_) => Container(),
             //  _buildContent(context, data.toDos),
           ),
         ),

@@ -3,12 +3,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 
-part 'control_panel_cubit.freezed.dart';
-part 'control_panel_state.dart';
+part 'home_cubit.freezed.dart';
+part 'home_state.dart';
 
 @injectable
-class ControlPanelCubit extends Cubit<ControlPanelState>{
-  ControlPanelCubit() : super(const ControlPanelState.initialized());
+class HomeCubit extends Cubit<HomeState>{
+  HomeCubit() : super(const HomeState.initialized());
 
   // List<String> initToDos() {
   //   List<String> toDos = [];
@@ -19,14 +19,14 @@ class ControlPanelCubit extends Cubit<ControlPanelState>{
   // }
 
   void initToDos() {
-    emit(const ControlPanelState.loading());
+    emit(const HomeState.loading());
 
     Future.delayed(Duration(seconds: 3));
     List<String> toDos = [];
     // toDos.add('Umyj siuraka');
     // toDos.add('Wyszoruj pupę');
 
-    emit(ControlPanelState.success(toDos));
+    emit(HomeState.success(toDos));
   }
   
 
