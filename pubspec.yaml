@@ -54,6 +54,7 @@ dependencies:
   equatable: ^2.0.5
   oauth2: ^2.0.2
   calendar_date_picker2: ^0.5.3
+  rolling_bottom_bar: ^0.2.2
   
 
 dev_dependencies:

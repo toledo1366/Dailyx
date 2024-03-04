@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../widgets/custom_bottom_bar.dart';
+
 @RoutePage()
 class ControlPanelPage extends StatefulWidget {
   const ControlPanelPage({super.key});
@@ -26,7 +28,9 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
           title: 'Hello, Damian!',
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+            // await context.router.push(const TaskFormRoute());
+          },
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15.0))
           ),
@@ -38,24 +42,11 @@ class _ControlPanelPageState extends State<ControlPanelPage> {
             initialized: (_) => const Text('Loading'),
             loading: (_) => const Text('Loading'),
             failed: (_) => Container(), 
-            success: (data) => Scaffold(
-              appBar: const CustomAppBar(
-                title: 'Hello, Damian!',
-              ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  context.router.navigate(TaskFormRoute());
-                },
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))
-                ), 
-                child: const Icon(Icons.add),
-                backgroundColor: Colors.deepPurple,
-              ),
-            body: _buildContent(context, data.toDos),
+            success: (data) => _buildContent(context, data.toDos)
+            //  _buildContent(context, data.toDos),
           ),
         ),
-      ),
+        bottomNavigationBar: CustomBottomBar(),
       ),
     );
   }
