@@ -1,0 +1,1 @@
+ /Users/damianszmulik/Desktop/Projekty/dailyx/.dart_tool/flutter_build/b0c11aa777569a06fe042cce8e0d730f/native_assets.yaml: 
