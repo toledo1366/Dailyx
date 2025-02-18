@@ -1,5 +1,7 @@
 import 'package:dailyx/core/db/register_adapters.dart';
 import 'package:dailyx/core/routing/app_router.dart';
+import 'package:dailyx/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -11,7 +13,14 @@ Future<void> main() async {
   initializeDateFormatting().then((_) => runApp(const MyApp()));
 }
 
+Future<void> _initializeFirebase() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
+}
+
 Future<void> _initializeTools() async {
+  await _initializeFirebase();
   await Hive.initFlutter();
   registerAdapters();
   await configureDependencies();

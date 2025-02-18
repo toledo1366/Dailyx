@@ -16,6 +16,8 @@ import 'package:dailyx/domain/repositories/tasks/tasks_repository.dart'
 import 'package:dailyx/domain/use_cases/tasks/create_new_task_use_case.dart'
     as _i47;
 import 'package:dailyx/domain/use_cases/tasks/get_tasks_use_case.dart' as _i836;
+import 'package:dailyx/presentation/pages/login/cubit/login_cubit.dart'
+    as _i112;
 import 'package:dailyx/presentation/pages/main/cubit/main_page_cubit.dart'
     as _i804;
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/cubit/diary_summary_entry_widget_cubit.dart'
@@ -43,6 +45,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i18.DiarySummaryEntryWidgetCubit());
     gh.factory<_i236.TasksSummaryWidgetCubit>(
         () => _i236.TasksSummaryWidgetCubit());
+    gh.factory<_i112.LoginCubit>(() => _i112.LoginCubit());
     gh.factory<_i563.TasksRepository>(
         () => _i461.TasksRepositoryImplementation());
     gh.factory<_i47.CreateNewTaskUseCase>(() => _i47.CreateNewTaskUseCase(

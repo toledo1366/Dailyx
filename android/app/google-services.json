@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1072804180194",
+    "project_id": "dailyx-33e5c",
+    "storage_bucket": "dailyx-33e5c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072804180194:android:1d535b9c2a516015456ebb",
+        "android_client_info": {
+          "package_name": "com.example.dailyx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072804180194-1vsqbj9v40uk92uvb5lcemut6b3j9m4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqmMpw03xsR1-Jc8-412RMqpuihb5HlSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072804180194-1vsqbj9v40uk92uvb5lcemut6b3j9m4d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1072804180194-js2fiki3jimjfkcbvpfrak3slbk8q8fp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dailyx"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
