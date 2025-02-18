@@ -26,6 +26,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "auth",
+      "rootUri": "../auth",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
       "name": "bloc",
       "rootUri": "file:///Users/damianszmulik/.pub-cache/hosted/pub.dev/bloc-8.1.4",
       "packageUri": "lib/",
@@ -734,7 +740,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-01-24T22:27:27.443716Z",
+  "generated": "2025-02-16T18:19:37.299579Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/damianszmulik/Desktop/devtools/flutter",
