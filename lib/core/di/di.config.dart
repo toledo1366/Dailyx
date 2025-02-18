@@ -20,6 +20,8 @@ import 'package:dailyx/presentation/pages/main/cubit/main_page_cubit.dart'
     as _i804;
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/cubit/diary_summary_entry_widget_cubit.dart'
     as _i18;
+import 'package:dailyx/presentation/pages/main/widgets/tasks_summary_widget/cubit/tasks_summary_widget_cubit.dart'
+    as _i236;
 import 'package:dailyx/presentation/pages/task_creation_form/cubit/task_creation_form_cubit.dart'
     as _i553;
 import 'package:get_it/get_it.dart' as _i174;
@@ -39,6 +41,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i636.TaskMapper>(() => _i636.TaskMapper());
     gh.factory<_i18.DiarySummaryEntryWidgetCubit>(
         () => _i18.DiarySummaryEntryWidgetCubit());
+    gh.factory<_i236.TasksSummaryWidgetCubit>(
+        () => _i236.TasksSummaryWidgetCubit());
     gh.factory<_i563.TasksRepository>(
         () => _i461.TasksRepositoryImplementation());
     gh.factory<_i47.CreateNewTaskUseCase>(() => _i47.CreateNewTaskUseCase(

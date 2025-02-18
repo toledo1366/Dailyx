@@ -1,6 +1,7 @@
 import 'package:dailyx/core/di/di.dart';
 import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/diary_summary_entry_widget.dart';
+import 'package:dailyx/presentation/pages/main/widgets/tasks_summary_widget/tasks_summary_widget.dart';
 import 'package:dailyx/presentation/widgets/end_drawer/custom_end_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,7 +97,8 @@ class _MainPageState extends State<MainPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DiarySummaryEntryWidget(),
-          
+          SizedBox(height: 30,),
+          TasksSummaryWidget()
         ],
       ),
     );
