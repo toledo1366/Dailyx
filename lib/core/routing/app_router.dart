@@ -3,10 +3,16 @@ import 'package:dailyx/presentation/pages/main/main_page.dart';
 import 'package:dailyx/presentation/pages/task_creation_form/task_creation_form_page.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../presentation/pages/login/login_page.dart';
+
 final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
+      builder: (context, state) => const LoginPage(),
+    ),
+    GoRoute(
+      path: '/main',
       builder: (context, state) => const MainPage(),
     ),
     GoRoute(

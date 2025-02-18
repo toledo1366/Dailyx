@@ -9,4 +9,7 @@ part 'login_cubit.freezed.dart';
 class LoginCubit extends Cubit<LoginState>{
   LoginCubit() : super(const LoginState.loading());
 
+  void loginWithGoogle(){
+    
+  }
 }
