@@ -314,6 +314,42 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "google_identity_services_web",
+      "rootUri": "file:///Users/damianszmulik/.pub-cache/hosted/pub.dev/google_identity_services_web-0.3.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "google_sign_in",
+      "rootUri": "file:///Users/damianszmulik/.pub-cache/hosted/pub.dev/google_sign_in-6.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "google_sign_in_android",
+      "rootUri": "file:///Users/damianszmulik/.pub-cache/hosted/pub.dev/google_sign_in_android-6.1.35",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "google_sign_in_ios",
+      "rootUri": "file:///Users/damianszmulik/.pub-cache/hosted/pub.dev/google_sign_in_ios-5.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "google_sign_in_platform_interface",
+      "rootUri": "file:///Users/damianszmulik/.pub-cache/hosted/pub.dev/google_sign_in_platform_interface-2.4.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "google_sign_in_web",
+      "rootUri": "file:///Users/damianszmulik/.pub-cache/hosted/pub.dev/google_sign_in_web-0.12.4+3",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
       "name": "graphs",
       "rootUri": "file:///Users/damianszmulik/.pub-cache/hosted/pub.dev/graphs-2.3.2",
       "packageUri": "lib/",
@@ -782,7 +818,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-02-18T18:35:27.255029Z",
+  "generated": "2025-02-19T11:20:22.937440Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/damianszmulik/Desktop/devtools/flutter",

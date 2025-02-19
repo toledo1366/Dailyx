@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 const Placeholder(),
                 _buildLoginWithGoogleButton(),
-                _buildLoginWithCredentialsButton(),
+                _buildLoginWithCredentialsButton(context),
               ],
             ),
           )
@@ -31,11 +31,11 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLoginWithCredentialsButton() => ElevatedButton(
+  Widget _buildLoginWithCredentialsButton(BuildContext context) => ElevatedButton(
     style: ElevatedButton.styleFrom(
       side: const BorderSide()
     ),
-    onPressed: (){}, 
+    onPressed: () async => await BlocProvider.of<LoginCubit>(context).loginWithEmailAndPassword(), 
     child: const SizedBox(
       width: 250,
       child: Row(
