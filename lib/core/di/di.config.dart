@@ -46,25 +46,27 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.factory<_i636.TaskMapper>(() => _i636.TaskMapper());
-    gh.factory<_i413.LoginWithGoogleUseCase>(
-        () => _i413.LoginWithGoogleUseCase());
     gh.factory<_i18.DiarySummaryEntryWidgetCubit>(
         () => _i18.DiarySummaryEntryWidgetCubit());
     gh.factory<_i236.TasksSummaryWidgetCubit>(
         () => _i236.TasksSummaryWidgetCubit());
     gh.factory<_i563.TasksRepository>(
         () => _i461.TasksRepositoryImplementation());
+    gh.factory<_i413.LoginWithGoogleUseCase>(
+        () => _i413.LoginWithGoogleUseCase(gh<_i797.AuthService>()));
     gh.factory<_i636.LoginWithEmailAndPasswordUseCase>(
         () => _i636.LoginWithEmailAndPasswordUseCase(gh<_i797.AuthService>()));
     gh.factory<_i47.CreateNewTaskUseCase>(() => _i47.CreateNewTaskUseCase(
           gh<_i563.TasksRepository>(),
           gh<_i636.TaskMapper>(),
         ));
-    gh.factory<_i112.LoginCubit>(
-        () => _i112.LoginCubit(gh<_i636.LoginWithEmailAndPasswordUseCase>()));
     gh.factory<_i836.GetTasksUseCase>(() => _i836.GetTasksUseCase(
           gh<_i636.TaskMapper>(),
           gh<_i563.TasksRepository>(),
+        ));
+    gh.factory<_i112.LoginCubit>(() => _i112.LoginCubit(
+          gh<_i636.LoginWithEmailAndPasswordUseCase>(),
+          gh<_i413.LoginWithGoogleUseCase>(),
         ));
     gh.factory<_i553.TaskCreationFormCubit>(
         () => _i553.TaskCreationFormCubit(gh<_i47.CreateNewTaskUseCase>()));

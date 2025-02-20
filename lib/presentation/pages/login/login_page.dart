@@ -21,8 +21,8 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 const Placeholder(),
-                _buildLoginWithGoogleButton(),
-                _buildLoginWithCredentialsButton(context),
+                _buildLoginWithGoogleButton(context),
+                // _buildLoginWithCredentialsButton(context),
               ],
             ),
           )
@@ -31,38 +31,38 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLoginWithCredentialsButton(BuildContext context) => ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      side: const BorderSide()
-    ),
-    onPressed: () async => await BlocProvider.of<LoginCubit>(context).loginWithEmailAndPassword(), 
-    child: const SizedBox(
-      width: 250,
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Icon(Icons.person, color: Colors.black,),
-          ),
-          Expanded(
-            child: Center(
-              child: StrokeText(
-                text: 'Zaloguj z użyciem hasła',
-                textStyle: TextStyle(fontSize: 15),
-                strokeWidth: 1.5,
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
+  // Widget _buildLoginWithCredentialsButton(BuildContext context) => ElevatedButton(
+  //   style: ElevatedButton.styleFrom(
+  //     side: const BorderSide()
+  //   ),
+  //   onPressed: () async => await BlocProvider.of<LoginCubit>(context).loginWithEmailAndPassword(), 
+  //   child: const SizedBox(
+  //     width: 250,
+  //     child: Row(
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.only(left: 15),
+  //           child: Icon(Icons.person, color: Colors.black,),
+  //         ),
+  //         Expanded(
+  //           child: Center(
+  //             child: StrokeText(
+  //               text: 'Zaloguj z użyciem hasła',
+  //               textStyle: TextStyle(fontSize: 15),
+  //               strokeWidth: 1.5,
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   ),
+  // );
 
-  Widget _buildLoginWithGoogleButton() => ElevatedButton(
+  Widget _buildLoginWithGoogleButton(BuildContext context) => ElevatedButton(
     style: ElevatedButton.styleFrom(
       side: const BorderSide()
     ),
-    onPressed: (){}, 
+    onPressed: () async => await BlocProvider.of<LoginCubit>(context).loginWithGmailProvider(), 
     child: SizedBox(
       width: 250,
       child: Row(

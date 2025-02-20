@@ -231,7 +231,7 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///Users/damianszmulik/Desktop/devtools/flutter/packages/flutter",
+      "rootUri": "file:///Users/damianszmulik/devtools/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -261,13 +261,13 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///Users/damianszmulik/Desktop/devtools/flutter/packages/flutter_test",
+      "rootUri": "file:///Users/damianszmulik/devtools/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///Users/damianszmulik/Desktop/devtools/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///Users/damianszmulik/devtools/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -651,7 +651,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///Users/damianszmulik/Desktop/devtools/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///Users/damianszmulik/devtools/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -818,10 +818,10 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-02-19T11:20:22.937440Z",
+  "generated": "2025-02-20T12:51:53.347179Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
-  "flutterRoot": "file:///Users/damianszmulik/Desktop/devtools/flutter",
+  "flutterRoot": "file:///Users/damianszmulik/devtools/flutter",
   "flutterVersion": "3.24.5",
   "pubCache": "file:///Users/damianszmulik/.pub-cache"
 }

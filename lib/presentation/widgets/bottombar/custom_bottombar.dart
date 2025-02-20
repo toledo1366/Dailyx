@@ -31,7 +31,7 @@ class _CustomBottombarState extends State<CustomBottombar> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              onPressed: () => router.go('/'), 
+              onPressed: () => router.go('/main'), 
               icon: const DecoratedIcon(
                 icon: Icon(
                   size: 30,
