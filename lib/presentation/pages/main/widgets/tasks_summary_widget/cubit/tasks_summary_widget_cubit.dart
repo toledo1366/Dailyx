@@ -1,11 +1,34 @@
+import 'package:dailyx/core/routing/app_router.dart';
+import 'package:dailyx/domain/use_cases/tasks/get_tasks_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../../../../domain/models/tasks/task.dart';
 
 part 'tasks_summary_widget_state.dart';
 part 'tasks_summary_widget_cubit.freezed.dart';
 
 @injectable
 class TasksSummaryWidgetCubit extends Cubit<TasksSummaryWidgetState>{
-  TasksSummaryWidgetCubit():super(const TasksSummaryWidgetState.loading());
+  final GetTasksUseCase _getTasksUseCase;
+
+  TasksSummaryWidgetCubit(this._getTasksUseCase):super(const TasksSummaryWidgetState.loading()){
+    Future.delayed(const Duration(seconds: 3), () => checkForTasks());
+  }
+
+  Future<void> checkForTasks() async {
+    List<Task> tasks = await _getTasksUseCase.execute();
+
+    if(tasks.isEmpty){
+      emit(const TasksSummaryWidgetState.noEntry());
+      return;
+    }
+
+    emit(TasksSummaryWidgetState.success(tasks));
+  }
+
+  void onNewTaskCreate(){
+    router.go('/task_creation_form');
+  }
 }

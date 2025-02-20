@@ -48,8 +48,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i636.TaskMapper>(() => _i636.TaskMapper());
     gh.factory<_i18.DiarySummaryEntryWidgetCubit>(
         () => _i18.DiarySummaryEntryWidgetCubit());
-    gh.factory<_i236.TasksSummaryWidgetCubit>(
-        () => _i236.TasksSummaryWidgetCubit());
     gh.factory<_i563.TasksRepository>(
         () => _i461.TasksRepositoryImplementation());
     gh.factory<_i413.LoginWithGoogleUseCase>(
@@ -72,6 +70,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i553.TaskCreationFormCubit(gh<_i47.CreateNewTaskUseCase>()));
     gh.factory<_i804.MainPageCubit>(
         () => _i804.MainPageCubit(gh<_i836.GetTasksUseCase>()));
+    gh.factory<_i236.TasksSummaryWidgetCubit>(
+        () => _i236.TasksSummaryWidgetCubit(gh<_i836.GetTasksUseCase>()));
     return this;
   }
 }

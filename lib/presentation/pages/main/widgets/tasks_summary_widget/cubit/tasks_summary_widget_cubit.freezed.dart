@@ -19,7 +19,7 @@ mixin _$TasksSummaryWidgetState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Task> tasks) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) =>
@@ -27,7 +27,7 @@ mixin _$TasksSummaryWidgetState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Task> tasks)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) =>
@@ -35,7 +35,7 @@ mixin _$TasksSummaryWidgetState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Task> tasks)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
@@ -126,7 +126,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Task> tasks) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) {
@@ -137,7 +137,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Task> tasks)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) {
@@ -148,7 +148,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Task> tasks)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
@@ -206,6 +206,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Task> tasks});
 }
 
 /// @nodoc
@@ -215,60 +217,90 @@ class __$$SuccessImplCopyWithImpl<$Res>
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tasks = null,
+  }) {
+    return _then(_$SuccessImpl(
+      null == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl();
+  const _$SuccessImpl(final List<Task> tasks) : _tasks = tasks;
+
+  final List<Task> _tasks;
+  @override
+  List<Task> get tasks {
+    if (_tasks is EqualUnmodifiableListView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
 
   @override
   String toString() {
-    return 'TasksSummaryWidgetState.success()';
+    return 'TasksSummaryWidgetState.success(tasks: $tasks)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Task> tasks) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) {
-    return success();
+    return success(tasks);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Task> tasks)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) {
-    return success?.call();
+    return success?.call(tasks);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Task> tasks)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(tasks);
     }
     return orElse();
   }
@@ -312,7 +344,12 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements TasksSummaryWidgetState {
-  const factory _Success() = _$SuccessImpl;
+  const factory _Success(final List<Task> tasks) = _$SuccessImpl;
+
+  List<Task> get tasks;
+  @JsonKey(ignore: true)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -354,7 +391,7 @@ class _$NoEntryImpl implements _NoEntry {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Task> tasks) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) {
@@ -365,7 +402,7 @@ class _$NoEntryImpl implements _NoEntry {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Task> tasks)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) {
@@ -376,7 +413,7 @@ class _$NoEntryImpl implements _NoEntry {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Task> tasks)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
@@ -468,7 +505,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Task> tasks) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) {
@@ -479,7 +516,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Task> tasks)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) {
@@ -490,7 +527,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Task> tasks)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),

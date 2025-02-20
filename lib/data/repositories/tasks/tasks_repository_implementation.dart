@@ -18,13 +18,11 @@ class TasksRepositoryImplementation implements TasksRepository{
   Future<List<TaskDto>> getItems() async {
     List<TaskDto> tasks = [];
 
-    final box = await Hive.openBox(tasksKey);
+    final box = await Hive.openBox<TaskDto>(tasksKey);
 
     try{
+      final box = await Hive.openBox<TaskDto>(tasksKey);
       final taskRaw = box.get(tasksKey);
-      for(var item in taskRaw!){
-        tasks.add(item);
-      }
       
       box.close();
 
@@ -44,22 +42,21 @@ class TasksRepositoryImplementation implements TasksRepository{
   
   @override
   Future<bool> createNewTask(List<TaskDto> tasks) async {
-    final box = await Hive.openBox(tasksKey);
+    final box = await Hive.openBox<TaskDto>(tasksKey);
 
     try{
       final items = box.get(tasksKey);
 
       if(items != null){
         box.clear();
-        items.addAll(tasks);
-        box.put(tasksKey, items);
+        box.addAll(tasks);
         box.close();
 
         return true;
       }
 
-      box.put(tasksKey, tasks);
-      box.close();
+      await box.addAll(tasks);
+      await box.close();
 
       return true;
     } catch (ex){
