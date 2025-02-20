@@ -8,14 +8,21 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:auth/auth_exports.dart' as _i797;
 import 'package:dailyx/data/repositories/tasks/tasks_repository_implementation.dart'
     as _i461;
 import 'package:dailyx/domain/mappers/tasks/task_mapper.dart' as _i636;
 import 'package:dailyx/domain/repositories/tasks/tasks_repository.dart'
     as _i563;
+import 'package:dailyx/domain/use_cases/login/login_with_email_and_password_use_case.dart'
+    as _i636;
+import 'package:dailyx/domain/use_cases/login/login_with_google_use_case.dart'
+    as _i413;
 import 'package:dailyx/domain/use_cases/tasks/create_new_task_use_case.dart'
     as _i47;
 import 'package:dailyx/domain/use_cases/tasks/get_tasks_use_case.dart' as _i836;
+import 'package:dailyx/presentation/pages/login/cubit/login_cubit.dart'
+    as _i112;
 import 'package:dailyx/presentation/pages/main/cubit/main_page_cubit.dart'
     as _i804;
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/cubit/diary_summary_entry_widget_cubit.dart'
@@ -45,6 +52,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i236.TasksSummaryWidgetCubit());
     gh.factory<_i563.TasksRepository>(
         () => _i461.TasksRepositoryImplementation());
+    gh.factory<_i413.LoginWithGoogleUseCase>(
+        () => _i413.LoginWithGoogleUseCase(gh<_i797.AuthService>()));
+    gh.factory<_i636.LoginWithEmailAndPasswordUseCase>(
+        () => _i636.LoginWithEmailAndPasswordUseCase(gh<_i797.AuthService>()));
     gh.factory<_i47.CreateNewTaskUseCase>(() => _i47.CreateNewTaskUseCase(
           gh<_i563.TasksRepository>(),
           gh<_i636.TaskMapper>(),
@@ -52,6 +63,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i836.GetTasksUseCase>(() => _i836.GetTasksUseCase(
           gh<_i636.TaskMapper>(),
           gh<_i563.TasksRepository>(),
+        ));
+    gh.factory<_i112.LoginCubit>(() => _i112.LoginCubit(
+          gh<_i636.LoginWithEmailAndPasswordUseCase>(),
+          gh<_i413.LoginWithGoogleUseCase>(),
         ));
     gh.factory<_i553.TaskCreationFormCubit>(
         () => _i553.TaskCreationFormCubit(gh<_i47.CreateNewTaskUseCase>()));
