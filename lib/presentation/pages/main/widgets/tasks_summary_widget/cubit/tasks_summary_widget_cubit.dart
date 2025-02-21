@@ -18,7 +18,8 @@ class TasksSummaryWidgetCubit extends Cubit<TasksSummaryWidgetState>{
   }
 
   Future<void> checkForTasks() async {
-    List<Task> tasks = await _getTasksUseCase.execute();
+    DateTime timeNow = DateTime.now();
+    List<Task> tasks = await _getTasksUseCase.execute(timeNow);
 
     if(tasks.isEmpty){
       emit(const TasksSummaryWidgetState.noEntry());

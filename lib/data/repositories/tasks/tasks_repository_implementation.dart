@@ -15,15 +15,23 @@ class TasksRepositoryImplementation implements TasksRepository{
   }
 
   @override
-  Future<List<TaskDto>> getItems() async {
-    List<TaskDto> tasks = [];
-
+  Future<List<TaskDto>> getItems(DateTime selectedDate) async {
     final box = await Hive.openBox<TaskDto>(tasksKey);
 
     try{
-      final box = await Hive.openBox<TaskDto>(tasksKey);
-      final taskRaw = box.get(tasksKey);
-      
+      final List<TaskDto> tasks = box.values.toList().where((item) => DateTime.tryParse(item.startDate)!.isAfter(selectedDate)).toList();
+
+      box.values.toList().forEach((item){
+        // if(selectedDate.isAfter(DateTime.tryParse(item.startDate)!) && selectedDate.isBefore(item.deadline.add(const Duration(days: 1)))){
+        // }
+
+        if(DateTime.tryParse(item.startDate)!.isAfter(selectedDate)){
+          tasks.add(item);
+        }
+      });
+
+
+
       box.close();
 
       return tasks;
