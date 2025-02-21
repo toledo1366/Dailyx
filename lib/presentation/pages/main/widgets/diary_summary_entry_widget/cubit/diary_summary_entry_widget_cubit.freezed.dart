@@ -19,7 +19,7 @@ mixin _$DiarySummaryEntryWidgetState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(DiaryEntry entry) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) =>
@@ -27,7 +27,7 @@ mixin _$DiarySummaryEntryWidgetState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(DiaryEntry entry)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) =>
@@ -35,7 +35,7 @@ mixin _$DiarySummaryEntryWidgetState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(DiaryEntry entry)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
@@ -128,7 +128,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(DiaryEntry entry) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) {
@@ -139,7 +139,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(DiaryEntry entry)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) {
@@ -150,7 +150,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(DiaryEntry entry)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
@@ -208,6 +208,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DiaryEntry entry});
 }
 
 /// @nodoc
@@ -217,60 +219,84 @@ class __$$SuccessImplCopyWithImpl<$Res>
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? entry = null,
+  }) {
+    return _then(_$SuccessImpl(
+      null == entry
+          ? _value.entry
+          : entry // ignore: cast_nullable_to_non_nullable
+              as DiaryEntry,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl();
+  const _$SuccessImpl(this.entry);
+
+  @override
+  final DiaryEntry entry;
 
   @override
   String toString() {
-    return 'DiarySummaryEntryWidgetState.success()';
+    return 'DiarySummaryEntryWidgetState.success(entry: $entry)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            (identical(other.entry, entry) || other.entry == entry));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, entry);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(DiaryEntry entry) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) {
-    return success();
+    return success(entry);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(DiaryEntry entry)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) {
-    return success?.call();
+    return success?.call(entry);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(DiaryEntry entry)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(entry);
     }
     return orElse();
   }
@@ -314,7 +340,12 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements DiarySummaryEntryWidgetState {
-  const factory _Success() = _$SuccessImpl;
+  const factory _Success(final DiaryEntry entry) = _$SuccessImpl;
+
+  DiaryEntry get entry;
+  @JsonKey(ignore: true)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -356,7 +387,7 @@ class _$NoEntryImpl implements _NoEntry {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(DiaryEntry entry) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) {
@@ -367,7 +398,7 @@ class _$NoEntryImpl implements _NoEntry {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(DiaryEntry entry)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) {
@@ -378,7 +409,7 @@ class _$NoEntryImpl implements _NoEntry {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(DiaryEntry entry)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
@@ -470,7 +501,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(DiaryEntry entry) success,
     required TResult Function() noEntry,
     required TResult Function() error,
   }) {
@@ -481,7 +512,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(DiaryEntry entry)? success,
     TResult? Function()? noEntry,
     TResult? Function()? error,
   }) {
@@ -492,7 +523,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(DiaryEntry entry)? success,
     TResult Function()? noEntry,
     TResult Function()? error,
     required TResult orElse(),
