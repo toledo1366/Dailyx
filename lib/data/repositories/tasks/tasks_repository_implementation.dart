@@ -19,7 +19,13 @@ class TasksRepositoryImplementation implements TasksRepository{
     final box = await Hive.openBox<TaskDto>(tasksKey);
 
     try{
-      final List<TaskDto> tasks = box.values.toList().where((item) => DateTime.tryParse(item.startDate)!.isAfter(selectedDate)).toList();
+      final List<TaskDto> tasks = box.values.toList().where((item) {
+        DateTime.tryParse(item.startDate)!.isBefore(selectedDate);
+
+        final itemDate = DateTime.tryParse(item.startDate);
+
+        return true;
+      }).toList();
 
       box.values.toList().forEach((item){
         // if(selectedDate.isAfter(DateTime.tryParse(item.startDate)!) && selectedDate.isBefore(item.deadline.add(const Duration(days: 1)))){
@@ -29,8 +35,6 @@ class TasksRepositoryImplementation implements TasksRepository{
           tasks.add(item);
         }
       });
-
-
 
       box.close();
 
