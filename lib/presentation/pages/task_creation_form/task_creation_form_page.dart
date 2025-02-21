@@ -3,8 +3,9 @@ import 'package:dailyx/presentation/pages/task_creation_form/cubit/task_creation
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:icon_decoration/icon_decoration.dart';
 import 'package:intl/intl.dart';
+import 'package:stroke_text/stroke_text.dart';
 
 import '../../../core/routing/app_router.dart';
 
@@ -40,14 +41,44 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
     _selectedDurationText = _durations[_selectedDuration];
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 218, 162),
       appBar: AppBar(
-        title:  const Text(
-          'Nowe zadanie',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold
+        // leading: IconButton(
+        //   padding: const EdgeInsets.only(top: 10),
+        //   icon: const DecoratedIcon(icon: Icon(Icons.arrow_back, color: Colors.white,),decoration: IconDecoration(border: IconBorder(width: 2)),),
+        //   onPressed: () => router.(),
+        //   tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+        // ),
+        centerTitle: true,
+        title: const Padding(
+          padding: EdgeInsets.only(top: 10, left: 10),
+            child: StrokeText(
+              text: 'Nowe zadanie', 
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold
+              ),
+              strokeColor: Colors.black,
+            ),
           ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(40),
+            bottomRight: Radius.circular(40)
+          ),
+          side: BorderSide(color: Colors.black)
         ),
+        backgroundColor: const Color.fromARGB(255, 132, 200, 255),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              padding: const EdgeInsets.only(top: 10),
+              icon: const DecoratedIcon(icon: Icon(Icons.more_horiz, color: Colors.white,),decoration: IconDecoration(border: IconBorder(width: 2)),),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            ),
+          ),
+        ],
       ),
       body: BlocProvider<TaskCreationFormCubit>(
         create: (context) => di.get<TaskCreationFormCubit>(),
@@ -71,7 +102,9 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
                       hintText: 'Wprowadź tytuł',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      )
+                      ),
+                      focusColor: Colors.white,
+                      hoverColor: Colors.white,
                     ),
                     onChanged: (value) => BlocProvider.of<TaskCreationFormCubit>(context).title = value,
                   ),
@@ -82,7 +115,8 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
                       hintText: 'Wprowadź krótki opis',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      )
+                      ),
+                      fillColor: Colors.white
                     ),
                     maxLines: 5,
                     onChanged: (value) => BlocProvider.of<TaskCreationFormCubit>(context).description = value,
@@ -94,11 +128,11 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
                       const Text(
                         'Data rozpoczęcia: ', 
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold
                         ),
                       ),
-                      Text(_startDate, style: const TextStyle(fontSize: 20),),
+                      Text(_startDate, style: const TextStyle(fontSize: 16),),
                       IconButton(onPressed: () async => await _showDateTimePicker(context, true), icon: const Icon(Icons.calendar_month, )),
                     ],
                   ),
@@ -109,11 +143,11 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
                       const Text(
                         'Data zakończenia: ', 
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold
                         ),
                       ),
-                      _endDate.isEmpty ? const Spacer() : Text(_endDate, style: const TextStyle(fontSize: 20),),
+                      _endDate.isEmpty ? const Spacer() : Text(_endDate, style: const TextStyle(fontSize: 16),),
                       IconButton(onPressed: () async => await _showDateTimePicker(context, false), icon: const Icon(Icons.calendar_month, )),
                     ],
                   ),
@@ -122,7 +156,7 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
                     children: [
                       const Text('Powtarzaj co: ', 
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold
                         ),
                       ),
@@ -213,12 +247,13 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
     final value = await showDatePicker(
       context: context,
       firstDate: isStart ? DateTime.now() : DateTime.parse(_startDate),
-      lastDate: DateTime(2025),
+      lastDate: DateTime(2100),
     );
 
     setState(() {
       if(isStart){
-        _startDate = formatter.format(value!);
+        if(value == null) return;
+        _startDate = formatter.format(value);
         BlocProvider.of<TaskCreationFormCubit>(context).startDate = value;
 
         return;
@@ -230,6 +265,6 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
   }
 
   void _navigateBack() {
-    router.go('/');
+    router.go('/main');
   }
 }

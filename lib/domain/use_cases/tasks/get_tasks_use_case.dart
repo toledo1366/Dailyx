@@ -10,10 +10,10 @@ class GetTasksUseCase{
 
   GetTasksUseCase(this._mapper, this._repository);
   
-  Future<List<Task>> execute() async {
+  Future<List<Task>> execute(DateTime selectedDate) async {
     final List<Task> tasksList = [];
 
-    final data = await _repository.getItems();
+    final data = await _repository.getItems(selectedDate);
 
     for (var rawTask in data) {
       tasksList.add(_mapper.fromDto(rawTask));

@@ -18,7 +18,7 @@ class MainPageCubit extends Cubit<MainPageState>{
 
   void getTasksList(DateTime selectedDate) async {
     if(tasks.isEmpty){
-      tasks = await _getTasksUseCase.execute();
+      tasks = await _getTasksUseCase.execute(selectedDate);
     }
 
     final List<Task> tasksForSelectedDate = [];
