@@ -30,6 +30,6 @@ class TasksSummaryWidgetCubit extends Cubit<TasksSummaryWidgetState>{
   }
 
   void onNewTaskCreate(){
-    router.go('/task_creation_form');
+    router.push('/task_creation_form');
   }
 }

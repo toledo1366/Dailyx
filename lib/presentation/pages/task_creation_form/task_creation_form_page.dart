@@ -43,12 +43,12 @@ class _TaskCreationFormPageState extends State<TaskCreationFormPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 218, 162),
       appBar: AppBar(
-        // leading: IconButton(
-        //   padding: const EdgeInsets.only(top: 10),
-        //   icon: const DecoratedIcon(icon: Icon(Icons.arrow_back, color: Colors.white,),decoration: IconDecoration(border: IconBorder(width: 2)),),
-        //   onPressed: () => router.(),
-        //   tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-        // ),
+        leading: IconButton(
+          padding: const EdgeInsets.only(top: 10),
+          icon: const DecoratedIcon(icon: Icon(Icons.arrow_back, color: Colors.white,),decoration: IconDecoration(border: IconBorder(width: 2)),),
+          onPressed: () => router.pop(),
+          tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+        ),
         centerTitle: true,
         title: const Padding(
           padding: EdgeInsets.only(top: 10, left: 10),
