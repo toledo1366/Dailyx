@@ -8,8 +8,8 @@ class DiaryEntryMapper extends BaseMapper<DiaryEntryDto, DiaryEntry>{
   @override
   DiaryEntry fromDto(DiaryEntryDto dto) {
     return DiaryEntry(
-      dto.createdAt,
-      dto.editedAt,
+      DateTime.parse(dto.createdAt),
+      dto.editedAt!.isNotEmpty ? DateTime.parse(dto.createdAt) : null,
       dto.content
     );
   }
@@ -17,8 +17,8 @@ class DiaryEntryMapper extends BaseMapper<DiaryEntryDto, DiaryEntry>{
   @override
   DiaryEntryDto toDto(DiaryEntry model) {
     return DiaryEntryDto(
-      model.createdAt,
-      model.editedAt,
+      model.createdAt.toString(),
+      model.editedAt?.toString() ?? '',
       model.content
     );
   }

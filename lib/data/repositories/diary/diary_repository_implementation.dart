@@ -5,11 +5,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: DiaryRepository)
-class DiaryRepositoryImplementation implements DiaryRepository{
+class DiaryRepositoryImplementation implements DiaryRepository {
   @override
-  Future<void> createEntry(DiaryEntryDto entry) {
-    // TODO: implement createEntry
-    throw UnimplementedError();
+  Future<void> createEntry(DiaryEntryDto entry) async {
+    final box = await Hive.openBox<DiaryEntryDto>(diaryEntriesKey);
+    await box.put('Created ${entry.createdAt}', entry);
   }
 
   @override
@@ -29,8 +29,16 @@ class DiaryRepositoryImplementation implements DiaryRepository{
   @override
   Future<DiaryEntryDto?> getEntryForSelectedDate(DateTime selectedDate) async {
     List<DiaryEntryDto> items = await getAllEntries();
+    if(items.isNotEmpty){
+      return items.firstWhere((item) {
+        final itemDate = DateTime.parse(item.createdAt);
+        return itemDate.year == selectedDate.year &&
+            itemDate.month == selectedDate.month &&
+            itemDate.day == selectedDate.day;
+      });
+    }
 
-    return items.isNotEmpty ? items.where((item) => DateTime.parse(item.createdAt) == selectedDate).first : null;
+    return null;
   }
 
   @override

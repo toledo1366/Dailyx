@@ -30,6 +30,8 @@ import 'package:dailyx/domain/use_cases/login/login_with_google_use_case.dart'
 import 'package:dailyx/domain/use_cases/tasks/create_new_task_use_case.dart'
     as _i47;
 import 'package:dailyx/domain/use_cases/tasks/get_tasks_use_case.dart' as _i836;
+import 'package:dailyx/presentation/pages/diary_editor/cubit/diary_editor_cubit.dart'
+    as _i996;
 import 'package:dailyx/presentation/pages/login/cubit/login_cubit.dart'
     as _i112;
 import 'package:dailyx/presentation/pages/main/cubit/main_page_cubit.dart'
@@ -91,6 +93,8 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i202.GetDiaryEntryForTodayUseCase>()));
     gh.factory<_i553.TaskCreationFormCubit>(
         () => _i553.TaskCreationFormCubit(gh<_i47.CreateNewTaskUseCase>()));
+    gh.factory<_i996.DiaryEditorCubit>(
+        () => _i996.DiaryEditorCubit(gh<_i752.CreateNewDiaryEntryUseCase>()));
     gh.factory<_i804.MainPageCubit>(
         () => _i804.MainPageCubit(gh<_i836.GetTasksUseCase>()));
     gh.factory<_i236.TasksSummaryWidgetCubit>(

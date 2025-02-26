@@ -17,8 +17,12 @@ class DiarySummaryEntryWidgetCubit extends Cubit<DiarySummaryEntryWidgetState>{
   }
 
   void checkEntryForToday() async {
-    final DiaryEntry? entry = await _diaryEntryForTodayUseCase.execute();
-    entry == null ? emit(const DiarySummaryEntryWidgetState.noEntry()) : emit(DiarySummaryEntryWidgetState.success(entry));
+    try{
+      final DiaryEntry? entry = await _diaryEntryForTodayUseCase.execute();
+      entry == null ? emit(const DiarySummaryEntryWidgetState.noEntry()) : emit(DiarySummaryEntryWidgetState.success(entry));
+    } catch (ex) {
+      emit(const DiarySummaryEntryWidgetState.error());
+    }
   }
   
   void navigateToDiaryEditor() async {

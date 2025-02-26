@@ -24,6 +24,7 @@ class _MainPageState extends State<MainPage> {
   int index = 0;
 
   DateTime focusedDay = DateTime.now();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -91,16 +92,24 @@ class _MainPageState extends State<MainPage> {
   }
   
   Widget buildContent(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0, right: 20.0), 
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          DiarySummaryEntryWidget(),
-          SizedBox(height: 30,),
-          TasksSummaryWidget()
-        ],
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) => Padding(
+        padding: const EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0, right: 20.0), 
+        child: RefreshIndicator(
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DiarySummaryEntryWidget(),
+                SizedBox(height: 30,),
+                TasksSummaryWidget(),
+              ],
+            ),
+          ), 
+          onRefresh: () async => print('object')
+        ),
+      )
     );
   }
 

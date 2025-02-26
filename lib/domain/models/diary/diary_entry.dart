@@ -1,6 +1,6 @@
 class DiaryEntry {
-  String createdAt;
-  String? editedAt;
+  DateTime createdAt;
+  DateTime? editedAt;
   String content;
 
   DiaryEntry(this.createdAt, this.editedAt, this.content);

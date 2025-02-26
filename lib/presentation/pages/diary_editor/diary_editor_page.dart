@@ -1,5 +1,8 @@
+import 'package:dailyx/core/di/di.dart';
 import 'package:dailyx/core/routing/app_router.dart';
+import 'package:dailyx/presentation/pages/diary_editor/cubit/diary_editor_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icon_decoration/icon_decoration.dart';
 import 'package:stroke_text/stroke_text.dart';
 
@@ -15,6 +18,7 @@ class DiaryEditorPage extends StatefulWidget {
 
 class _DiaryEditorPageState extends State<DiaryEditorPage> {
   final _formKey = GlobalKey<FormState>();
+  final _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +64,15 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0, right: 20.0), 
-        child: _buildContent(context),
+        child: BlocProvider<DiaryEditorCubit>(
+          create: (context) => di.get<DiaryEditorCubit>(),
+          child: BlocConsumer<DiaryEditorCubit, DiaryEditorState>(
+            listener: (context, state) {
+              
+            },
+            builder: (context, state) => _buildContent(context),
+          ),
+        ),
       ),
       endDrawer: const CustomEndDrawer(),
       bottomNavigationBar: const CustomBottombar(),
@@ -83,6 +95,7 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
             child: TextFormField(
               maxLines: 1000,
               cursorColor: Colors.black,
+              controller: _textController,
               decoration: const InputDecoration(
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide.none
@@ -101,7 +114,9 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
               backgroundColor: const Color.fromARGB(255, 132, 200, 255),
               side: const BorderSide()
             ),
-            onPressed: (){}, 
+            onPressed: () async {
+              await BlocProvider.of<DiaryEditorCubit>(context).saveEntry(_textController.value.text);
+            },  
             child: const StrokeText(
               text: 'Zapisz',
               textStyle: TextStyle(
