@@ -22,7 +22,11 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/diary_editor',
-      builder: (context, state) => const DiaryEditorPage(),
+      builder: (context, state) {
+        final selectedDate = state.extra as DateTime;
+
+        return DiaryEditorPage(selectedDate: selectedDate);
+      },
     ),
     GoRoute(
       path: '/diary_page',

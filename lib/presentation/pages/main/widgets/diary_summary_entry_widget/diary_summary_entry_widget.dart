@@ -12,37 +12,34 @@ class DiarySummaryEntryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DiarySummaryEntryWidgetCubit>(
-      create: (context) => di.get<DiarySummaryEntryWidgetCubit>(),
-      child: BlocBuilder<DiarySummaryEntryWidgetCubit, DiarySummaryEntryWidgetState>(
-        builder: (context, state) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: StrokeText(
-                text: 'Dzisiejszy wpis:',
-                strokeWidth: 1.8,
-                textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),
+    return BlocBuilder<DiarySummaryEntryWidgetCubit, DiarySummaryEntryWidgetState>(
+      builder: (context, state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(bottom: 10),
+            child: StrokeText(
+              text: 'Dzisiejszy wpis:',
+              strokeWidth: 1.8,
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold
               ),
             ),
-            state.map(
-              loading: (_) => const Text('Loading'), 
-              success: (data) => _createLoadedDiaryEntrySummary(context, data.entry), 
-              noEntry: (_) => _createEmptyDiaryEntrySummary(context), 
-              error: (_) => const Text('Error'), 
-            )
-          ],
-        )
-      ),
+          ),
+          state.map(
+            loading: (_) => const Text('Loading'), 
+            success: (data) => _createLoadedDiaryEntrySummary(context, data.entry), 
+            noEntry: (_) => _createEmptyDiaryEntrySummary(context), 
+            error: (_) => const Text('Error'), 
+          )
+        ],
+      )
     );
   }
 
-   Widget _createEmptyDiaryEntrySummary(BuildContext context) => GestureDetector(
+  Widget _createEmptyDiaryEntrySummary(BuildContext context) => GestureDetector(
     onTap: () => BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).navigateToDiaryEditor(),
     child: Container(
       height: 50,

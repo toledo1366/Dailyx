@@ -14,8 +14,8 @@ class DiaryEditorCubit extends Cubit<DiaryEditorState>{
 
   DiaryEditorCubit(this._createNewDiaryEntryUseCase) : super(const DiaryEditorState.created());
 
-  Future<void> saveEntry(String content) async{
-    DiaryEntry entry = DiaryEntry(DateTime.now(), null, content); 
+  Future<void> saveEntry(String content, DateTime selectedDate) async{
+    DiaryEntry entry = DiaryEntry(selectedDate, null, content); 
     await _createNewDiaryEntryUseCase.execute(entry);
   }
 }

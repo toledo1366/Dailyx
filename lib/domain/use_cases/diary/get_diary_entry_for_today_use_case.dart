@@ -11,9 +11,9 @@ class GetDiaryEntryForTodayUseCase {
 
   GetDiaryEntryForTodayUseCase(this._mapper, this._repository);
 
-  Future<DiaryEntry?> execute() async {
-    final DateTime today = DateTime.now();
-    final DiaryEntryDto? dto = await _repository.getEntryForSelectedDate(today);
+  Future<DiaryEntry?> execute(DateTime? selectedDate) async {
+    selectedDate ??= DateTime.now();
+    final DiaryEntryDto? dto = await _repository.getEntryForSelectedDate(selectedDate);
 
     if(dto != null){
       return _mapper.fromDto(dto);
