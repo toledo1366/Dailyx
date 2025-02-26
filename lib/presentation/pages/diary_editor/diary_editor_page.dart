@@ -10,6 +10,8 @@ import '../../widgets/bottombar/custom_bottombar.dart';
 import '../../widgets/end_drawer/custom_end_drawer.dart';
 
 class DiaryEditorPage extends StatefulWidget {
+
+  
   const DiaryEditorPage({super.key});
 
   @override

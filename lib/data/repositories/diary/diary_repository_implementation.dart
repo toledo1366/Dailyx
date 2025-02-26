@@ -32,9 +32,8 @@ class DiaryRepositoryImplementation implements DiaryRepository {
     if(items.isNotEmpty){
       return items.firstWhere((item) {
         final itemDate = DateTime.parse(item.createdAt);
-        return itemDate.year == selectedDate.year &&
-            itemDate.month == selectedDate.month &&
-            itemDate.day == selectedDate.day;
+
+        return itemDate.year == selectedDate.year && itemDate.month == selectedDate.month && itemDate.day == selectedDate.day;
       });
     }
 
