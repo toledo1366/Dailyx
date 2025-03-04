@@ -10,9 +10,9 @@ import '../../widgets/bottombar/custom_bottombar.dart';
 import '../../widgets/end_drawer/custom_end_drawer.dart';
 
 class DiaryEditorPage extends StatefulWidget {
-
+  final DateTime selectedDate;
   
-  const DiaryEditorPage({super.key});
+  const DiaryEditorPage({super.key, required this.selectedDate});
 
   @override
   State<DiaryEditorPage> createState() => _DiaryEditorPageState();
@@ -88,7 +88,7 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
           key: _formKey,
           child: Container(
             padding: const EdgeInsets.all(15.0),
-            height: 500,
+            height: 300,
             decoration: BoxDecoration(
               color: Colors.white,
               border: const Border.fromBorderSide(BorderSide()),
@@ -117,7 +117,7 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
               side: const BorderSide()
             ),
             onPressed: () async {
-              await BlocProvider.of<DiaryEditorCubit>(context).saveEntry(_textController.value.text);
+              await BlocProvider.of<DiaryEditorCubit>(context).saveEntry(_textController.value.text, widget.selectedDate);
             },  
             child: const StrokeText(
               text: 'Zapisz',

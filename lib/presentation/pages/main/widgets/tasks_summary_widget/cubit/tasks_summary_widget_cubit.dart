@@ -18,6 +18,11 @@ class TasksSummaryWidgetCubit extends Cubit<TasksSummaryWidgetState>{
   }
 
   Future<void> checkForTasks() async {
+    if(state != const TasksSummaryWidgetState.loading()){
+      emit(const TasksSummaryWidgetState.loading());
+      Future.delayed(const Duration(seconds: 5));
+    }
+
     DateTime timeNow = DateTime.now();
     List<Task> tasks = await _getTasksUseCase.execute(timeNow);
 

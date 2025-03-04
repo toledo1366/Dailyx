@@ -12,33 +12,30 @@ class TasksSummaryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TasksSummaryWidgetCubit>(
-      create: (context) => di.get<TasksSummaryWidgetCubit>(),
-      child: BlocBuilder<TasksSummaryWidgetCubit, TasksSummaryWidgetState>(
-        builder: (context, state) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: StrokeText(
-                text: 'Dzisiejsze bieżące zadania:',
-                strokeWidth: 1.8,
-                textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),
+    return BlocBuilder<TasksSummaryWidgetCubit, TasksSummaryWidgetState>(
+      builder: (context, state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(bottom: 10),
+            child: StrokeText(
+              text: 'Dzisiejsze bieżące zadania:',
+              strokeWidth: 1.8,
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold
               ),
             ),
-            state.map(
-              loading: (_) => const Text('Loading'), 
-              success: (data) => _createLoadedTasksSummary(context, data.tasks),
-              noEntry: (_) => _createEmptyTasksSummary(context),
-              error: (_) => const Text('Error'),
-            )
-          ],
-        )
-      ),
+          ),
+          state.map(
+            loading: (_) => const Text('Loading'), 
+            success: (data) => _createLoadedTasksSummary(context, data.tasks),
+            noEntry: (_) => _createEmptyTasksSummary(context),
+            error: (_) => const Text('Error'),
+          )
+        ],
+      )
     );
   }
 
@@ -72,7 +69,7 @@ class TasksSummaryWidget extends StatelessWidget {
   Widget _createLoadedTasksSummary(BuildContext context, List<Task> tasks) => GestureDetector(
     onTap: () {},
     child: Container(
-      height: MediaQuery.sizeOf(context).height,
+      height: 400,//MediaQuery.sizeOf(context).height,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 201, 230, 254),

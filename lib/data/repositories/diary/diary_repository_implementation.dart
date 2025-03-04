@@ -8,8 +8,12 @@ import 'package:injectable/injectable.dart';
 class DiaryRepositoryImplementation implements DiaryRepository {
   @override
   Future<void> createEntry(DiaryEntryDto entry) async {
-    final box = await Hive.openBox<DiaryEntryDto>(diaryEntriesKey);
-    await box.put('Created ${entry.createdAt}', entry);
+    try{
+      final box = await Hive.openBox<DiaryEntryDto>(diaryEntriesKey);
+      await box.put('Created ${entry.createdAt}', entry);
+    }catch (ex){
+      print(ex);
+    }
   }
 
   @override
@@ -28,13 +32,18 @@ class DiaryRepositoryImplementation implements DiaryRepository {
 
   @override
   Future<DiaryEntryDto?> getEntryForSelectedDate(DateTime selectedDate) async {
-    List<DiaryEntryDto> items = await getAllEntries();
-    if(items.isNotEmpty){
-      return items.firstWhere((item) {
-        final itemDate = DateTime.parse(item.createdAt);
+    try{
+      List<DiaryEntryDto> items = await getAllEntries();
 
-        return itemDate.year == selectedDate.year && itemDate.month == selectedDate.month && itemDate.day == selectedDate.day;
-      });
+      if(items.isNotEmpty){
+        return items.firstWhere((item) {
+          final itemDate = DateTime.parse(item.createdAt);
+
+          return itemDate.year == selectedDate.year && itemDate.month == selectedDate.month && itemDate.day == selectedDate.day;
+        });
+      }
+    } catch (ex) {
+      return null;
     }
 
     return null;

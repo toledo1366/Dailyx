@@ -30,17 +30,7 @@ class MainPageCubit extends Cubit<MainPageState>{
     }
 
     emit(const MainPageState.created());
-
-    // if(tasksForSelectedDate.isNotEmpty) {
-    //   emit(MainPageState.tasksLoaded(tasksForSelectedDate));
-
-    //   return;
-    // }
-
-    // emit(const MainPageState.error('Brak zadań na dziś'));
   }
-
-
 
   String calculateTaskEndTime(Task task){
     final lasts = task.deadline.difference(task.startDate).inDays;

@@ -1,6 +1,8 @@
 import 'package:dailyx/core/di/di.dart';
 import 'package:dailyx/core/routing/app_router.dart';
+import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/cubit/diary_summary_entry_widget_cubit.dart';
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/diary_summary_entry_widget.dart';
+import 'package:dailyx/presentation/pages/main/widgets/tasks_summary_widget/cubit/tasks_summary_widget_cubit.dart';
 import 'package:dailyx/presentation/pages/main/widgets/tasks_summary_widget/tasks_summary_widget.dart';
 import 'package:dailyx/presentation/widgets/end_drawer/custom_end_drawer.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +33,12 @@ class _MainPageState extends State<MainPage> {
     final MainPageCubit cubit = di.get<MainPageCubit>();
     cubit.getTasksList(focusedDay);
 
-    return BlocProvider<MainPageCubit>(
-      create: (context) => cubit,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MainPageCubit>(create: (context) => cubit),
+        BlocProvider<DiarySummaryEntryWidgetCubit>(create: (context) => di.get<DiarySummaryEntryWidgetCubit>()),
+        BlocProvider<TasksSummaryWidgetCubit>(create: (context) => di.get<TasksSummaryWidgetCubit>()),
+      ],
       child: BlocBuilder<MainPageCubit, MainPageState>(
         builder: (context, state) => Scaffold(
           backgroundColor: const Color.fromARGB(255, 255, 218, 162),
@@ -107,14 +113,13 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ), 
-          onRefresh: () async => print('object')
+          onRefresh: () async {
+            await BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).checkEntryForSelectedDate(focusedDay);
+            await BlocProvider.of<TasksSummaryWidgetCubit>(context).checkForTasks();
+          }
         ),
       )
     );
-  }
-
-  void _navigateToTaskCreationForm() {
-    router.go('/task_creation_form');
   }
   
   Widget buildDaySelector(BuildContext context) {
@@ -127,7 +132,7 @@ class _MainPageState extends State<MainPage> {
           onPressed: (){
             setState(() {
               focusedDay = focusedDay.subtract(const Duration(days: 1));
-              BlocProvider.of<MainPageCubit>(context).getTasksList(focusedDay);
+              BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).checkEntryForSelectedDate(focusedDay);
             });
           }, 
           icon: const DecoratedIcon(
@@ -156,7 +161,7 @@ class _MainPageState extends State<MainPage> {
           onPressed: () {
             setState(() {
               focusedDay = focusedDay.add(const Duration(days: 1));
-              BlocProvider.of<MainPageCubit>(context).getTasksList(focusedDay);
+              BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).checkEntryForSelectedDate(focusedDay);
             });
           }, 
           icon: const DecoratedIcon(

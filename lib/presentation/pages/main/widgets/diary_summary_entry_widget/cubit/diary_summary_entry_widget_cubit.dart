@@ -13,12 +13,17 @@ class DiarySummaryEntryWidgetCubit extends Cubit<DiarySummaryEntryWidgetState>{
   final GetDiaryEntryForTodayUseCase _diaryEntryForTodayUseCase;
 
   DiarySummaryEntryWidgetCubit(this._diaryEntryForTodayUseCase):super(const DiarySummaryEntryWidgetState.loading()){
-    Future.delayed(const Duration(seconds: 3), () => checkEntryForToday());
+    Future.delayed(const Duration(seconds: 3), () => checkEntryForSelectedDate(null));
   }
 
-  void checkEntryForToday() async {
+  Future<void> checkEntryForSelectedDate(DateTime? selectedDate) async {
+    if(state != const DiarySummaryEntryWidgetState.loading()){
+      emit(const DiarySummaryEntryWidgetState.loading());
+            Future.delayed(Duration(seconds: 2));
+
+    }
     try{
-      final DiaryEntry? entry = await _diaryEntryForTodayUseCase.execute();
+      final DiaryEntry? entry = await _diaryEntryForTodayUseCase.execute(selectedDate);
       entry == null ? emit(const DiarySummaryEntryWidgetState.noEntry()) : emit(DiarySummaryEntryWidgetState.success(entry));
     } catch (ex) {
       emit(const DiarySummaryEntryWidgetState.error());
@@ -26,6 +31,6 @@ class DiarySummaryEntryWidgetCubit extends Cubit<DiarySummaryEntryWidgetState>{
   }
   
   void navigateToDiaryEditor() async {
-    router.push('/diary_editor');
+    router.push('/diary_editor', extra: DateTime.now());
   }
 }
