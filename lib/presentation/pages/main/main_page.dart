@@ -113,7 +113,10 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ), 
-          onRefresh: () async => print('object')
+          onRefresh: () async {
+            await BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).checkEntryForSelectedDate(focusedDay);
+            await BlocProvider.of<TasksSummaryWidgetCubit>(context).checkForTasks();
+          }
         ),
       )
     );

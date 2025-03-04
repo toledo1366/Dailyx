@@ -88,7 +88,7 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
           key: _formKey,
           child: Container(
             padding: const EdgeInsets.all(15.0),
-            height: 500,
+            height: 300,
             decoration: BoxDecoration(
               color: Colors.white,
               border: const Border.fromBorderSide(BorderSide()),

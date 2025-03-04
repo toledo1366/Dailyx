@@ -69,7 +69,7 @@ class TasksSummaryWidget extends StatelessWidget {
   Widget _createLoadedTasksSummary(BuildContext context, List<Task> tasks) => GestureDetector(
     onTap: () {},
     child: Container(
-      height: MediaQuery.sizeOf(context).height,
+      height: 400,//MediaQuery.sizeOf(context).height,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 201, 230, 254),

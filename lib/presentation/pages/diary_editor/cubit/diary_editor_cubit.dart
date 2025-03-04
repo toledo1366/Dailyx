@@ -1,3 +1,4 @@
+import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/domain/use_cases/diary/create_new_diary_entry_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,5 +18,6 @@ class DiaryEditorCubit extends Cubit<DiaryEditorState>{
   Future<void> saveEntry(String content, DateTime selectedDate) async{
     DiaryEntry entry = DiaryEntry(selectedDate, null, content); 
     await _createNewDiaryEntryUseCase.execute(entry);
+    router.pushReplacement('/main');
   }
 }

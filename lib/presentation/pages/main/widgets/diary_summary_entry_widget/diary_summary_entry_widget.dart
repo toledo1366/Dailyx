@@ -1,4 +1,3 @@
-import 'package:dailyx/core/di/di.dart';
 import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/domain/models/diary/diary_entry.dart';
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/cubit/diary_summary_entry_widget_cubit.dart';
