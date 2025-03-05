@@ -82,53 +82,55 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
   }
 
   Widget _buildContent(BuildContext context) {
-    return Column(
-      children: [
-        Form(
-          key: _formKey,
-          child: Container(
-            padding: const EdgeInsets.all(15.0),
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: const Border.fromBorderSide(BorderSide()),
-              borderRadius: BorderRadius.circular(20.0)
-            ),
-            child: TextFormField(
-              maxLines: 1000,
-              cursorColor: Colors.black,
-              controller: _textController,
-              decoration: const InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide.none
+    return LayoutBuilder(
+      builder: (context, constraints) => Column(
+        children: [
+          Form(
+            key: _formKey,
+            child: Container(
+              padding: const EdgeInsets.all(15.0),
+              height: constraints.maxHeight * 0.8,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: const Border.fromBorderSide(BorderSide()),
+                borderRadius: BorderRadius.circular(20.0)
+              ),
+              child: TextFormField(
+                maxLines: 1000,
+                cursorColor: Colors.black,
+                controller: _textController,
+                decoration: const InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide.none
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide.none
+                  )
                 ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide.none
-                )
               ),
-            ),
-          )
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 30),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 132, 200, 255),
-              side: const BorderSide()
-            ),
-            onPressed: () async {
-              await BlocProvider.of<DiaryEditorCubit>(context).saveEntry(_textController.value.text, widget.selectedDate);
-            },  
-            child: const StrokeText(
-              text: 'Zapisz',
-              textStyle: TextStyle(
-                fontSize: 18
-              ),
-              strokeWidth: 1.5,
             )
           ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 132, 200, 255),
+                side: const BorderSide()
+              ),
+              onPressed: () async {
+                await BlocProvider.of<DiaryEditorCubit>(context).saveEntry(_textController.value.text, widget.selectedDate);
+              },  
+              child: const StrokeText(
+                text: 'Zapisz',
+                textStyle: TextStyle(
+                  fontSize: 18
+                ),
+                strokeWidth: 1.5,
+              )
+            ),
+          )
+        ],
+      )
     );
   }
 }

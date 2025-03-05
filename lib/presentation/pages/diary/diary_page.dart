@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:icon_decoration/icon_decoration.dart';
+import 'package:intl/intl.dart';
 import 'package:stroke_text/stroke_text.dart';
 
 import '../../../core/routing/app_router.dart';
+import '../../../domain/models/diary/diary_entry.dart';
 import '../../widgets/bottombar/custom_bottombar.dart';
 import '../../widgets/end_drawer/custom_end_drawer.dart';
 
 class DiaryPage extends StatelessWidget {
-  final String content;
+  final DiaryEntry entry;
 
-  const DiaryPage({super.key, required this.content});
+  const DiaryPage({super.key, required this.entry});
 
   @override
   Widget build(BuildContext context) {
+    DateFormat formatter = DateFormat('EEEE,', 'pl_PL').add_yMd();
+    
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 218, 162),
       appBar: AppBar(
@@ -22,12 +26,12 @@ class DiaryPage extends StatelessWidget {
           onPressed: () => router.pop(),
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         ),
-        centerTitle: false,
-        title: const Padding(
-          padding: EdgeInsets.only(top: 10, left: 15),
+        centerTitle: true,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 10),
             child: StrokeText(
-            text: 'Powiedz jak Ci minął dzień?', 
-            textStyle: TextStyle(
+            text: formatter.format(entry.createdAt), 
+            textStyle: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold
             ),
@@ -53,15 +57,27 @@ class DiaryPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0, right: 20.0), 
-        child: StrokeText(
-          text: content,
-          strokeWidth: 1.8,
-          textStyle: const TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold
+      body: Container(
+        margin: const EdgeInsets.all(10),
+        height: MediaQuery.sizeOf(context).height,
+        width: MediaQuery.sizeOf(context).width,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 201, 230, 254),
+          border: const Border.fromBorderSide(BorderSide()),
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0, right: 20.0), 
+            child: StrokeText(
+              text: entry.content,
+              strokeWidth: 1.8,
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold
+              ),
+            ),
           ),
         ),
       ),

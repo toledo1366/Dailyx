@@ -1,3 +1,4 @@
+import 'package:dailyx/domain/models/diary/diary_entry.dart';
 import 'package:dailyx/presentation/pages/diary/diary_page.dart';
 import 'package:dailyx/presentation/pages/diary_editor/diary_editor_page.dart';
 import 'package:dailyx/presentation/pages/main/main_page.dart';
@@ -31,9 +32,9 @@ final router = GoRouter(
     GoRoute(
       path: '/diary_page',
       builder: (context, state) {
-        final content = state.extra as String;
+        final entry = state.extra as DiaryEntry;
 
-        return DiaryPage(content: content);
+        return DiaryPage(entry: entry,);
       },
     )
   ],

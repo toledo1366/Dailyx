@@ -66,7 +66,7 @@ class DiarySummaryEntryWidget extends StatelessWidget {
   );
 
   Widget _createLoadedDiaryEntrySummary(BuildContext context, DiaryEntry entry) => GestureDetector(
-    onTap: () => router.push('/diary_page', extra: entry.content),
+    onTap: () => router.push('/diary_page', extra: entry),
     child: Container(
       padding: const EdgeInsets.all(10),
       width: double.infinity,
@@ -80,7 +80,17 @@ class DiarySummaryEntryWidget extends StatelessWidget {
         ),
         borderRadius: BorderRadius.all(Radius.circular(10))
       ),
-      child: Text(entry.content, maxLines: 1,),
+      child: StrokeText(
+        text: entry.content, 
+        textStyle: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold
+        ),
+        strokeWidth: 1.8,
+        strokeColor: Colors.black,
+        maxLines: 1, 
+        overflow: TextOverflow.ellipsis
+      )
     ),
   );
 }
