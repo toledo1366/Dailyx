@@ -21,6 +21,7 @@ class DiaryEditorPage extends StatefulWidget {
 class _DiaryEditorPageState extends State<DiaryEditorPage> {
   final _formKey = GlobalKey<FormState>();
   final _textController = TextEditingController();
+  double _sliderValue = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
               fontWeight: FontWeight.bold
             ),
             strokeColor: Colors.black,
+            textScaler: TextScaler.linear(0.8),
           ),
         ),
         shape: const RoundedRectangleBorder(
@@ -83,8 +85,11 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
 
   Widget _buildContent(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) => Column(
+      builder: (context, constraints) => SizedBox(
+        child: SingleChildScrollView(
+          child: Column(
         children: [
+          _buildEmotionSlider(context, constraints),
           Form(
             key: _formKey,
             child: Container(
@@ -130,7 +135,77 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
             ),
           )
         ],
+      ),
+        ),
       )
     );
+  }
+
+  Widget _buildEmotionSlider(BuildContext context, BoxConstraints constraints) {
+    return Row(
+      children: [
+        ShaderMask(
+          shaderCallback: (Rect bounds) {
+            return const LinearGradient(
+              colors: [Color.fromARGB(255, 177, 14, 2), Colors.red, Colors.yellow, Colors.green, Color.fromARGB(255, 0, 180, 6)],
+              stops: [0.0, 0.25, 0.5, 0.75, 1.0],
+            ).createShader(bounds);
+          },
+          child: SizedBox(
+            width: constraints.maxWidth*0.9,
+            child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                activeTrackColor: Colors.white,
+                inactiveTrackColor: Colors.grey.shade300,
+                thumbColor: Colors.white,
+                overlayColor: Colors.grey.withOpacity(0.3),
+                trackHeight: 10.0,
+              ),
+              child: Slider(
+                value: _sliderValue,
+                onChanged: (newValue) {
+                  setState(() {
+                    _sliderValue = newValue;
+                    _getCurrentColor();
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(90),
+            border: Border.all()
+          ),
+          child: getCurrentIcon(),
+        )
+      ],
+    );
+  }
+
+  Color _getCurrentColor() {
+    if (_sliderValue < 0.5) {
+      // Interpolacja między czerwonym a żółtym
+      return Color.lerp(Colors.red, Colors.yellow, _sliderValue * 2)!;
+    } else {
+      // Interpolacja między żółtym a zielonym
+      return Color.lerp(Colors.yellow, Colors.green, (_sliderValue - 0.5) * 2)!;
+    }
+  }
+
+  Icon getCurrentIcon(){
+    if(_sliderValue < 0.15){
+      return Icon(Icons.sentiment_very_dissatisfied_outlined, color: _getCurrentColor());
+    } else if (_sliderValue >=0.15 && _sliderValue < 0.45){
+      return Icon(Icons.sentiment_dissatisfied_outlined, color: _getCurrentColor());
+    } else if (_sliderValue >= 0.45 && _sliderValue < 0.65){
+      return Icon(Icons.sentiment_neutral_outlined, color: _getCurrentColor());
+    }else if (_sliderValue >= 0.65 && _sliderValue < 0.85){
+      return Icon(Icons.sentiment_satisfied_alt_outlined, color: _getCurrentColor());
+    }else {
+      return Icon(Icons.sentiment_very_satisfied_outlined, color: _getCurrentColor());
+    }
   }
 }
