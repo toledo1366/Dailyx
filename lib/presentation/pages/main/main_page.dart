@@ -1,5 +1,4 @@
 import 'package:dailyx/core/di/di.dart';
-import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/cubit/diary_summary_entry_widget_cubit.dart';
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/diary_summary_entry_widget.dart';
 import 'package:dailyx/presentation/pages/main/widgets/tasks_summary_widget/cubit/tasks_summary_widget_cubit.dart';
@@ -104,12 +103,12 @@ class _MainPageState extends State<MainPage> {
         child: RefreshIndicator(
           child: SingleChildScrollView(
             controller: _scrollController,
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DiarySummaryEntryWidget(),
-                SizedBox(height: 30,),
-                TasksSummaryWidget(),
+                DiarySummaryEntryWidget(focusedDay),
+                const SizedBox(height: 30,),
+                const TasksSummaryWidget(),
               ],
             ),
           ), 

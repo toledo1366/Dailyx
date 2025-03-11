@@ -10,7 +10,8 @@ class DiaryEntryMapper extends BaseMapper<DiaryEntryDto, DiaryEntry>{
     return DiaryEntry(
       DateTime.parse(dto.createdAt),
       dto.editedAt!.isNotEmpty ? DateTime.parse(dto.createdAt) : null,
-      dto.content
+      dto.content,
+      dto.satisfactionLevel ?? 0
     );
   }
 
@@ -19,7 +20,8 @@ class DiaryEntryMapper extends BaseMapper<DiaryEntryDto, DiaryEntry>{
     return DiaryEntryDto(
       model.createdAt.toString(),
       model.editedAt?.toString() ?? '',
-      model.content
+      model.content,
+      model.satisfactionLevel
     );
   }
   

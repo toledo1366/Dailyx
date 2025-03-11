@@ -13,5 +13,8 @@ class DiaryEntryDto extends HiveObject{
   @HiveField(2)
   String content;
 
-  DiaryEntryDto(this.createdAt, this.editedAt, this.content);
+  @HiveField(3)
+  double? satisfactionLevel;
+
+  DiaryEntryDto(this.createdAt, this.editedAt, this.content, this.satisfactionLevel);
 }

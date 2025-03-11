@@ -1,6 +1,8 @@
 import 'package:dailyx/core/di/di.dart';
 import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/presentation/pages/diary_editor/cubit/diary_editor_cubit.dart';
+import 'package:dailyx/presentation/widgets/sliders/cubit/emotion_slider_cubit.dart';
+import 'package:dailyx/presentation/widgets/sliders/emotion_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icon_decoration/icon_decoration.dart';
@@ -21,7 +23,6 @@ class DiaryEditorPage extends StatefulWidget {
 class _DiaryEditorPageState extends State<DiaryEditorPage> {
   final _formKey = GlobalKey<FormState>();
   final _textController = TextEditingController();
-  double _sliderValue = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +69,17 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0, right: 20.0), 
-        child: BlocProvider<DiaryEditorCubit>(
-          create: (context) => di.get<DiaryEditorCubit>(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<DiaryEditorCubit>(create: (context) => di.get<DiaryEditorCubit>()),
+            BlocProvider<EmotionSliderCubit>(create: (context) => EmotionSliderCubit(0.0)),
+          ], 
           child: BlocConsumer<DiaryEditorCubit, DiaryEditorState>(
             listener: (context, state) {
               
             },
             builder: (context, state) => _buildContent(context),
-          ),
+          )
         ),
       ),
       endDrawer: const CustomEndDrawer(),
@@ -88,124 +92,54 @@ class _DiaryEditorPageState extends State<DiaryEditorPage> {
       builder: (context, constraints) => SizedBox(
         child: SingleChildScrollView(
           child: Column(
-        children: [
-          _buildEmotionSlider(context, constraints),
-          Form(
-            key: _formKey,
-            child: Container(
-              padding: const EdgeInsets.all(15.0),
-              height: constraints.maxHeight * 0.8,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: const Border.fromBorderSide(BorderSide()),
-                borderRadius: BorderRadius.circular(20.0)
-              ),
-              child: TextFormField(
-                maxLines: 1000,
-                cursorColor: Colors.black,
-                controller: _textController,
-                decoration: const InputDecoration(
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide.none
+            children: [
+              EmotionSlider(constraints),
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: const EdgeInsets.all(15.0),
+                  height: constraints.maxHeight * 0.8,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: const Border.fromBorderSide(BorderSide()),
+                    borderRadius: BorderRadius.circular(20.0)
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide.none
+                  child: TextFormField(
+                    maxLines: 1000,
+                    cursorColor: Colors.black,
+                    controller: _textController,
+                    decoration: const InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide.none
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide.none
+                      )
+                    ),
+                  ),
+                )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 132, 200, 255),
+                    side: const BorderSide()
+                  ),
+                  onPressed: () async => await BlocProvider.of<DiaryEditorCubit>(context).saveEntry(_textController.value.text, widget.selectedDate, context.read<EmotionSliderCubit>().state),  
+                  child: const StrokeText(
+                    text: 'Zapisz',
+                    textStyle: TextStyle(
+                      fontSize: 18
+                    ),
+                    strokeWidth: 1.5,
                   )
                 ),
-              ),
-            )
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 132, 200, 255),
-                side: const BorderSide()
-              ),
-              onPressed: () async {
-                await BlocProvider.of<DiaryEditorCubit>(context).saveEntry(_textController.value.text, widget.selectedDate);
-              },  
-              child: const StrokeText(
-                text: 'Zapisz',
-                textStyle: TextStyle(
-                  fontSize: 18
-                ),
-                strokeWidth: 1.5,
               )
-            ),
-          )
-        ],
-      ),
+            ],
+          ),
         ),
       )
     );
-  }
-
-  Widget _buildEmotionSlider(BuildContext context, BoxConstraints constraints) {
-    return Row(
-      children: [
-        ShaderMask(
-          shaderCallback: (Rect bounds) {
-            return const LinearGradient(
-              colors: [Color.fromARGB(255, 177, 14, 2), Colors.red, Colors.yellow, Colors.green, Color.fromARGB(255, 0, 180, 6)],
-              stops: [0.0, 0.25, 0.5, 0.75, 1.0],
-            ).createShader(bounds);
-          },
-          child: SizedBox(
-            width: constraints.maxWidth*0.9,
-            child: SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                activeTrackColor: Colors.white,
-                inactiveTrackColor: Colors.grey.shade300,
-                thumbColor: Colors.white,
-                overlayColor: Colors.grey.withOpacity(0.3),
-                trackHeight: 10.0,
-              ),
-              child: Slider(
-                value: _sliderValue,
-                onChanged: (newValue) {
-                  setState(() {
-                    _sliderValue = newValue;
-                    _getCurrentColor();
-                  });
-                },
-              ),
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(90),
-            border: Border.all()
-          ),
-          child: getCurrentIcon(),
-        )
-      ],
-    );
-  }
-
-  Color _getCurrentColor() {
-    if (_sliderValue < 0.5) {
-      // Interpolacja między czerwonym a żółtym
-      return Color.lerp(Colors.red, Colors.yellow, _sliderValue * 2)!;
-    } else {
-      // Interpolacja między żółtym a zielonym
-      return Color.lerp(Colors.yellow, Colors.green, (_sliderValue - 0.5) * 2)!;
-    }
-  }
-
-  Icon getCurrentIcon(){
-    if(_sliderValue < 0.15){
-      return Icon(Icons.sentiment_very_dissatisfied_outlined, color: _getCurrentColor());
-    } else if (_sliderValue >=0.15 && _sliderValue < 0.45){
-      return Icon(Icons.sentiment_dissatisfied_outlined, color: _getCurrentColor());
-    } else if (_sliderValue >= 0.45 && _sliderValue < 0.65){
-      return Icon(Icons.sentiment_neutral_outlined, color: _getCurrentColor());
-    }else if (_sliderValue >= 0.65 && _sliderValue < 0.85){
-      return Icon(Icons.sentiment_satisfied_alt_outlined, color: _getCurrentColor());
-    }else {
-      return Icon(Icons.sentiment_very_satisfied_outlined, color: _getCurrentColor());
-    }
   }
 }

@@ -20,19 +20,22 @@ class DiaryEntryDtoAdapter extends TypeAdapter<DiaryEntryDto> {
       fields[0] as String,
       fields[1] as String?,
       fields[2] as String,
+      fields[3] as double?,
     );
   }
 
   @override
   void write(BinaryWriter writer, DiaryEntryDto obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.createdAt)
       ..writeByte(1)
       ..write(obj.editedAt)
       ..writeByte(2)
-      ..write(obj.content);
+      ..write(obj.content)
+      ..writeByte(3)
+      ..write(obj.satisfactionLevel);
   }
 
   @override

@@ -7,7 +7,8 @@ import 'package:stroke_text/stroke_text.dart';
 import 'package:widgets_easier/widgets_easier.dart';
 
 class DiarySummaryEntryWidget extends StatelessWidget {
-  const DiarySummaryEntryWidget({super.key});
+  final DateTime selectedDate;
+  const DiarySummaryEntryWidget(this.selectedDate, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class DiarySummaryEntryWidget extends StatelessWidget {
   }
 
   Widget _createEmptyDiaryEntrySummary(BuildContext context) => GestureDetector(
-    onTap: () => BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).navigateToDiaryEditor(),
+    onTap: () => BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).navigateToDiaryEditor(selectedDate),
     child: Container(
       height: 50,
       width: double.infinity,

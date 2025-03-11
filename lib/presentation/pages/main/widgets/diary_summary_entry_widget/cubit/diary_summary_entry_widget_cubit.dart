@@ -30,7 +30,7 @@ class DiarySummaryEntryWidgetCubit extends Cubit<DiarySummaryEntryWidgetState>{
     }
   }
   
-  void navigateToDiaryEditor() async {
-    router.push('/diary_editor', extra: DateTime.now());
+  void navigateToDiaryEditor(DateTime selectedDate) async {
+    router.push('/diary_editor', extra: selectedDate);
   }
 }
