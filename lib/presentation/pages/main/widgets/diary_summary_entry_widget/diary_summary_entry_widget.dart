@@ -1,3 +1,4 @@
+import 'package:dailyx/core/extension/colors_extension.dart';
 import 'package:dailyx/core/routing/app_router.dart';
 import 'package:dailyx/domain/models/diary/diary_entry.dart';
 import 'package:dailyx/presentation/pages/main/widgets/diary_summary_entry_widget/cubit/diary_summary_entry_widget_cubit.dart';
@@ -13,85 +14,72 @@ class DiarySummaryEntryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DiarySummaryEntryWidgetCubit, DiarySummaryEntryWidgetState>(
-      builder: (context, state) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 10),
-            child: StrokeText(
-              text: 'Dzisiejszy wpis:',
-              strokeWidth: 1.8,
-              textStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
+      builder: (context, state) => Container(
+        margin: const EdgeInsets.only(left: 17, right: 25, top: 37, bottom: 49),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.transparent
+          ),
+          borderRadius: BorderRadius.circular(20),
+          // color: ColorsExtension.fromHex('#FFFFFF')
+          color: const Color.fromARGB(255, 201, 230, 254)
+        ),
+        width: MediaQuery.sizeOf(context).width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 8, bottom: 4, left: 20),
+              child: Text(
+                'Dzisiejszy wpis:',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
-          ),
-          state.map(
-            loading: (_) => const Text('Loading'), 
-            success: (data) => _createLoadedDiaryEntrySummary(context, data.entry), 
-            noEntry: (_) => _createEmptyDiaryEntrySummary(context), 
-            error: (_) => const Text('Error'), 
-          )
-        ],
+            state.map(
+              loading: (_) => const Text('Loading'), 
+              success: (data) => _createLoadedDiaryEntrySummary(context, data.entry), 
+              noEntry: (_) => _createEmptyDiaryEntrySummary(context), 
+              error: (_) => const Text('Error'), 
+            )
+          ],
+        ),
       )
     );
   }
 
   Widget _createEmptyDiaryEntrySummary(BuildContext context) => GestureDetector(
-    onTap: () => BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).navigateToDiaryEditor(selectedDate),
-    child: Container(
-      height: 50,
-      width: double.infinity,
-      decoration: const ShapeDecoration(
-        color: Color.fromARGB(255, 201, 230, 254),
-        shape: DashedBorder(
+    onTap: () => BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).navigateToDiaryEditor(),
+    child: const Padding(
+      padding: EdgeInsets.only(left: 20, right: 25, top: 4, bottom: 13),
+      child: Text(
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor lacus sit amet varius condimentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Pellentesque molestie, orci et sodales egestas, velit dui tristique ante, nec aliquam mauris odio nec mi. Pellentesque viverra nisi dui, non facilisis turpis lacinia sed. Praesent pulvinar quam eu augue tincidunt, vitae ornare nisi consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a erat a tellus pretium maximus. Pellentesque vel felis tristique, tincidunt nibh in, porttitor tortor. Cras ornare nulla id maximus aliquet. In hac habitasse platea dictumst. Integer laoreet sapien at odio luctus ultricies. Vivamus sollicitudin lobortis enim in fermentum. Suspendisse diam enim, dignissim eu volutpat laoreet, accumsan in neque. In hac habitasse platea dictumst. Integer interdum sit amet ante sed mattis. Aenean consectetur, sapien et congue vulputate, metus neque dignissim tellus, vel accumsan neque ante sed felis.',
+        style: TextStyle(
           color: Colors.black,
-          width: 1,
-          borderRadius: BorderRadius.all(Radius.circular(10))
-        )
-      ),
-      child: const Center(
-        child: StrokeText(
-          text: 'Brak wpisów dzisiaj',
-          strokeWidth: 1.8,
-          textStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold
-          ),
+          fontSize: 14,
         ),
+        maxLines: 4,
+        overflow: TextOverflow.ellipsis,
       ),
     ),
   );
 
   Widget _createLoadedDiaryEntrySummary(BuildContext context, DiaryEntry entry) => GestureDetector(
     onTap: () => router.push('/diary_page', extra: entry),
-    child: Container(
-      padding: const EdgeInsets.all(10),
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 201, 230, 254),
-        border: Border.fromBorderSide(
-          BorderSide(
-            color: Colors.black,
-            width: 1,
-          )
+    child: Padding(
+      padding: const EdgeInsets.only(left: 20, right: 25, top: 4, bottom: 13),
+      child: Text(
+        entry.content,
+        style: const TextStyle(
+          color: Colors.black,
+          fontSize: 14,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(10))
+        maxLines: 4,
+        overflow: TextOverflow.ellipsis,
       ),
-      child: StrokeText(
-        text: entry.content, 
-        textStyle: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold
-        ),
-        strokeWidth: 1.8,
-        strokeColor: Colors.black,
-        maxLines: 1, 
-        overflow: TextOverflow.ellipsis
-      )
     ),
   );
 }

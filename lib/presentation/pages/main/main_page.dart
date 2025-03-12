@@ -10,6 +10,7 @@ import 'package:icon_decoration/icon_decoration.dart';
 import 'package:intl/intl.dart';
 import 'package:stroke_text/stroke_text.dart';
 
+import '../../../core/extension/colors_extension.dart';
 import '../../widgets/bottombar/custom_bottombar.dart';
 import 'cubit/main_page_cubit.dart';
 
@@ -40,30 +41,21 @@ class _MainPageState extends State<MainPage> {
       ],
       child: BlocBuilder<MainPageCubit, MainPageState>(
         builder: (context, state) => Scaffold(
-          backgroundColor: const Color.fromARGB(255, 255, 218, 162),
+          backgroundColor: ColorsExtension.fromHex('#F8F9FA'),
           appBar: AppBar(
             centerTitle: false,
             title: const Padding(
-              padding: EdgeInsets.only(top: 10, left: 15),
-                child: StrokeText(
-                text: 'Cześć, Damian!', 
-                textStyle: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
+              padding: EdgeInsets.only(top: 52, left: 21, bottom: 48, right: 68),
+                child: Text(
+                'Cześć, Damian!', 
+                style: TextStyle(
+                  fontSize: 32,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
-                strokeWidth: 2,
-                strokeColor: Colors.black,
               ),
             ),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40)
-              ),
-              side: BorderSide(color: Colors.black)
-            ),
-            backgroundColor: const Color.fromARGB(255, 132, 200, 255),
+            backgroundColor: Colors.transparent,
             bottom: PreferredSize(
               preferredSize: const Size(double.infinity, 50), 
               child: Container(
@@ -73,8 +65,9 @@ class _MainPageState extends State<MainPage> {
             actions: [
               Builder(
                 builder: (context) => IconButton(
-                  padding: const EdgeInsets.only(top: 10),
-                  icon: const DecoratedIcon(icon: Icon(Icons.more_horiz, color: Colors.white,),decoration: IconDecoration(border: IconBorder(width: 2)),),
+                  
+                  padding: const EdgeInsets.only(top: 20, bottom: 48, right: 18),
+                  icon: const DecoratedIcon(icon: Icon(Icons.more_horiz, color: Colors.black,),),
                   onPressed: () => Scaffold.of(context).openEndDrawer(),
                   tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
                 ),
@@ -98,9 +91,7 @@ class _MainPageState extends State<MainPage> {
   
   Widget buildContent(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) => Padding(
-        padding: const EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0, right: 20.0), 
-        child: RefreshIndicator(
+      builder: (context, constraints) => RefreshIndicator(
           child: SingleChildScrollView(
             controller: _scrollController,
             child: Column(
@@ -116,8 +107,7 @@ class _MainPageState extends State<MainPage> {
             await BlocProvider.of<DiarySummaryEntryWidgetCubit>(context).checkEntryForSelectedDate(focusedDay);
             await BlocProvider.of<TasksSummaryWidgetCubit>(context).checkForTasks();
           }
-        ),
-      )
+        )
     );
   }
   
@@ -141,17 +131,16 @@ class _MainPageState extends State<MainPage> {
               )
             ),
             icon: Icon(
-              Icons.arrow_left_rounded, 
-              color: Colors.white, 
-              size: 50,
+              Icons.chevron_left, 
+              color: Colors.black, 
+              size: 30,
             )
           )
         ),
-        StrokeText(
-          text: formatter.format(focusedDay),
-          strokeWidth: 1.8,
-          textStyle: const TextStyle(
-            color: Colors.white,
+        Text(
+          formatter.format(focusedDay),
+          style: const TextStyle(
+            color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.bold
           ),
@@ -170,9 +159,9 @@ class _MainPageState extends State<MainPage> {
               )
             ),
             icon: Icon(
-              Icons.arrow_right_rounded, 
-              color: Colors.white, 
-              size: 50,
+              Icons.chevron_right, 
+              color: Colors.black, 
+              size: 30,
             )
           )
         ),
