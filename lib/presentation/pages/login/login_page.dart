@@ -2,6 +2,7 @@ import 'package:dailyx/core/di/di.dart';
 import 'package:dailyx/core/extension/colors_extension.dart';
 import 'package:dailyx/core/helpers/icons.dart';
 import 'package:dailyx/presentation/pages/login/cubit/login_cubit.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,17 +42,25 @@ class LoginPage extends StatelessWidget {
               _buildLoginWithCredentialsButton(context),
               _buildLoginWithGoogleButton(context),
               Padding(
-                padding: const EdgeInsets.only(),
+                padding: const EdgeInsets.only(bottom: 40, top: 40),
                 child: RichText(
                   text: TextSpan(
-                    text: 'Nie masz konta?',
+                    text: 'Nie masz konta? ',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
                       color: ColorsExtension.fromHex('#171A1F')
                     ),
                     children: [
-                      // TextButton(onPressed: (){}, child: Text('Stwórz konto.'))
+                      TextSpan(
+                        text: "Stwórz konto!",
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () => print('Tapped')
+                      )
                     ]
                   )
                 ),
@@ -123,15 +132,16 @@ class LoginPage extends StatelessWidget {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 21, right: 21, top: 66),
+              padding: const EdgeInsets.only(left: 21, right: 21, top: 46),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorsExtension.fromHex('#636AE8'),
                   minimumSize: const Size(348, 52)
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    // Proces logowania
+                    final xxx = _formKey.currentState!.context;
+                    await BlocProvider.of<LoginCubit>(context).loginWithEmailAndPassword('', 'password');
                   }
                 },
                 child: Text(
@@ -150,7 +160,7 @@ class LoginPage extends StatelessWidget {
   );
 
   Widget _buildLoginWithGoogleButton(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 24),
+    padding: const EdgeInsets.only(top: 14),
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white

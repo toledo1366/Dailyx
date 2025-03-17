@@ -15,17 +15,21 @@ class LoginCubit extends Cubit<LoginState>{
 
   LoginCubit(this._loginWithEmailAndPasswordUseCase, this._loginWithGoogleUseCase) : super(const LoginState.loading());
 
-  // Future<void> loginWithEmailAndPassword() async {
-  //   bool isLogged = await _loginWithEmailAndPasswordUseCase.execute("email", "password");
-  //   print(isLogged);
-  // }
+  Future<void> loginWithEmailAndPassword(String email, String password) async {
+    await _loginWithEmailAndPasswordUseCase.execute(email, password)
+      .whenComplete(
+        ()=> _navigateToMainPage()
+      ).onError<Exception>((e, _) {
+        throw Exception("Error");
+    });
+  }
 
   Future<void> loginWithGmailProvider() async {
     await _loginWithGoogleUseCase.execute()
       .whenComplete(
         ()=> _navigateToMainPage()
       ).onError<Exception>((e, _) {
-        throw Exception("");
+        throw Exception("Error");
     });
 
   }

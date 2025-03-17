@@ -9,8 +9,7 @@ class LoginWithEmailAndPasswordUseCase {
   LoginWithEmailAndPasswordUseCase(this._authService);
 
   Future<bool> execute(String email, String password) async {
-    // UserCredential? user = await _authService.logInWithEmailAndPassword(email, password);
-    UserCredential? user = await _authService.logInWithGoogleProvider();
+    UserCredential? user = await _authService.logInWithEmailAndPassword(email, password);
 
     if(user!.credential!.accessToken!.isNotEmpty){
       return true;
